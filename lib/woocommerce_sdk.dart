@@ -145,7 +145,7 @@ class WooCommerceSdk {
     };
 
     final response = await http.post(
-      this.baseUrl + URL_JWT_TOKEN,
+      this.baseUrl + URL_AUTH_TOKEN,
       body: body,
     );
 
