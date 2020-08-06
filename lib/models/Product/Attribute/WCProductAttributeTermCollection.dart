@@ -1,0 +1,17 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'WCProductAttributeTermCollection.g.dart';
+
+@JsonSerializable()
+class WCProductAttributeTermCollection {
+  final String href;
+
+  WCProductAttributeTermCollection(this.href);
+
+  factory WCProductAttributeTermCollection.fromJson(
+          Map<String, dynamic> json) =>
+      _$WCProductAttributeTermCollectionFromJson(json);
+
+  Map<String, dynamic> toJson() =>
+      _$WCProductAttributeTermCollectionToJson(this);
+}
