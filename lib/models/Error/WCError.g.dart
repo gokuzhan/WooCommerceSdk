@@ -10,9 +10,7 @@ WCError _$WCErrorFromJson(Map<String, dynamic> json) {
   return WCError(
     json['code'] as String,
     json['message'] as String,
-    json['data'] == null
-        ? null
-        : WCErrorData.fromJson(json['data'] as Map<String, dynamic>),
+    json['data'] as Map<String, dynamic>,
   );
 }
 
