@@ -8,7 +8,7 @@ import 'dart:math';
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:woocommerce_sdk/helpers/Jwt.dart';
+import 'package:woocommerce_sdk/models/Auth/Auth.dart';
 
 import 'constants/constants.dart';
 import 'helpers/Query.dart';
@@ -120,9 +120,9 @@ class WooCommerceSdk {
     }
   }
 
-  WCJwtDecoder _authInstance;
+  Auth _authInstance;
 
-  WCJwtDecoder get authInstance => _authInstance;
+  Auth get authInstance => _authInstance;
 
   Uri queryUri;
 
@@ -152,7 +152,7 @@ class WooCommerceSdk {
     if (response.statusCode >= 200 && response.statusCode < 300) {
       WCJwtResponse authResponse =
           WCJwtResponse.fromJson(json.decode(response.body));
-      _authInstance = WCJwtDecoder(token: authResponse.token);
+      _authInstance = Auth(token: authResponse.token);
       _localDbService.updateSecurityToken(_authInstance.token);
       _urlHeader['Authorization'] = 'Bearer ${authResponse.token}';
       return _authInstance;
@@ -1679,15 +1679,14 @@ class WooCommerceSdk {
 
   // Get the auth token from db.
 
-  Future<WCJwtDecoder> getAuthInstance() async {
-    final WCJwtDecoder token =
-    new WCJwtDecoder(token: await _localDbService.getSecurityToken());
-    if (await token.isExpired()) {
+  Future<Auth> getAuthInstance() async {
+    final Auth auth = new Auth(token: await _localDbService.getSecurityToken());
+    if (await auth.isExpired) {
       _authInstance = null;
       return null;
     }
-    _authInstance = token.token;
-    return token;
+    _authInstance = auth;
+    return auth;
   }
 
   // Sets the Uri for an endpoint.
