@@ -1681,6 +1681,7 @@ class WooCommerceSdk {
 
   Future<Auth> getAuthInstance() async {
     final Auth auth = new Auth(token: await _localDbService.getSecurityToken());
+    print(auth);
     if (await auth.isExpired) {
       _authInstance = null;
       return null;
@@ -1690,20 +1691,20 @@ class WooCommerceSdk {
   }
 
   // Sets the Uri for an endpoint.
-  String _setApiResourceUrl({
+  Future<String> _setApiResourceUrl({
     @required String path,
     String host,
     port,
     queryParameters,
     bool isShop = false,
-  }) {
+  }) async {
     this.apiPath = DEFAULT_WC_API_PATH;
     if (isShop) {
       this.apiPath = URL_STORE_API_PATH;
     } else {
       this.apiPath = DEFAULT_WC_API_PATH;
     }
-    getAuthInstance();
+    await getAuthInstance();
     queryUri = new Uri(
         path: path, queryParameters: queryParameters, port: port, host: host);
     _printDebug('Query : ' + queryUri.toString());
