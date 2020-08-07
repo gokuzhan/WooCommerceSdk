@@ -120,9 +120,9 @@ class WooCommerceSdk {
     }
   }
 
-  WCJwtDecoder _authToken;
+  WCJwtDecoder _authInstance;
 
-  WCJwtDecoder get authToken => _authToken;
+  WCJwtDecoder get authInstance => _authInstance;
 
   Uri queryUri;
 
@@ -132,7 +132,7 @@ class WooCommerceSdk {
   Map<String, String> _urlHeader = {'Authorization': ''};
 
   String get urlHeader =>
-      _urlHeader['Authorization'] = 'Bearer ' + authToken.token;
+      _urlHeader['Authorization'] = 'Bearer ' + authInstance.token;
   LocalDatabaseService _localDbService = new LocalDatabaseService();
 
   /// Authenticates the user using WordPress JWT authentication and returns the access [_token] string.
@@ -152,10 +152,10 @@ class WooCommerceSdk {
     if (response.statusCode >= 200 && response.statusCode < 300) {
       WCJwtResponse authResponse =
           WCJwtResponse.fromJson(json.decode(response.body));
-      _authToken = WCJwtDecoder(token: authResponse.token);
-      _localDbService.updateSecurityToken(_authToken.token);
+      _authInstance = WCJwtDecoder(token: authResponse.token);
+      _localDbService.updateSecurityToken(_authInstance.token);
       _urlHeader['Authorization'] = 'Bearer ${authResponse.token}';
-      return _authToken;
+      return _authInstance;
     } else {
       throw new WCError.fromJson(json.decode(response.body));
     }
@@ -195,7 +195,7 @@ class WooCommerceSdk {
   ///
   /// Associated endpoint : /wp-json/wp/v2/users/me
   Future<int> fetchLoggedInUserId() async {
-    _urlHeader['Authorization'] = 'Bearer ' + _authToken.token;
+    _urlHeader['Authorization'] = 'Bearer ' + _authInstance.token;
     final response =
     await http.get(this.baseUrl + URL_USER_ME, headers: _urlHeader);
 
@@ -980,8 +980,8 @@ class WooCommerceSdk {
       'quantity': quantity,
     };
     if (variations != null) data['variations'] = variations;
-    await getAuthTokenInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + _authToken.token;
+    await getAuthInstance();
+    _urlHeader['Authorization'] = 'Bearer ' + _authInstance.token;
     final response = await http.post(
         this.baseUrl + URL_STORE_API_PATH + 'cart/items',
         headers: _urlHeader,
@@ -1003,8 +1003,8 @@ class WooCommerceSdk {
   /// Related endpoint : wc/store/cart/items
 
   Future<List<WCCartItem>> getMyCartItems() async {
-    await getAuthTokenInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + _authToken.token;
+    await getAuthInstance();
+    _urlHeader['Authorization'] = 'Bearer ' + _authInstance.token;
     final response = await http.get(
         this.baseUrl + URL_STORE_API_PATH + 'cart/items',
         headers: _urlHeader);
@@ -1031,8 +1031,8 @@ class WooCommerceSdk {
   /// Returns the current user's [WCCart], information
 
   Future<WCCart> getMyCart() async {
-    await getAuthTokenInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + _authToken.token;
+    await getAuthInstance();
+    _urlHeader['Authorization'] = 'Bearer ' + _authInstance.token;
     WCCart cart;
     final response = await http.get(this.baseUrl + URL_STORE_API_PATH + 'cart',
         headers: _urlHeader);
@@ -1053,8 +1053,8 @@ class WooCommerceSdk {
       'key': key,
     };
     _printDebug('Deleting CartItem With Payload : ' + data.toString());
-    await getAuthTokenInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + _authToken.token;
+    await getAuthInstance();
+    _urlHeader['Authorization'] = 'Bearer ' + _authInstance.token;
 
     final http.Response response = await http.delete(
       this.baseUrl + URL_STORE_API_PATH + 'cart/items/' + key,
@@ -1077,8 +1077,8 @@ class WooCommerceSdk {
   }
 
   Future deleteAllMyCartItems() async {
-    await getAuthTokenInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + _authToken.token;
+    await getAuthInstance();
+    _urlHeader['Authorization'] = 'Bearer ' + _authInstance.token;
 
     final http.Response response = await http.delete(
       this.baseUrl + URL_STORE_API_PATH + 'cart/items/',
@@ -1097,8 +1097,8 @@ class WooCommerceSdk {
   /// Returns a [WCCartItem], with the specified [key].
 
   Future<WCCartItem> getMyCartItemByKey(String key) async {
-    await getAuthTokenInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + _authToken.token;
+    await getAuthInstance();
+    _urlHeader['Authorization'] = 'Bearer ' + _authInstance.token;
     WCCartItem cartItem;
     final response = await http.get(
         this.baseUrl + URL_STORE_API_PATH + 'cart/items/' + key,
@@ -1126,8 +1126,8 @@ class WooCommerceSdk {
       'quantity': quantity.toString(),
     };
     if (variations != null) data['variations'] = variations;
-    await getAuthTokenInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + _authToken.token;
+    await getAuthInstance();
+    _urlHeader['Authorization'] = 'Bearer ' + _authInstance.token;
     final response = await http.put(
         this.baseUrl + URL_STORE_API_PATH + 'cart/items/' + key,
         headers: _urlHeader,
@@ -1679,14 +1679,14 @@ class WooCommerceSdk {
 
   // Get the auth token from db.
 
-  Future<WCJwtDecoder> getAuthTokenInstance() async {
+  Future<WCJwtDecoder> getAuthInstance() async {
     final WCJwtDecoder token =
     new WCJwtDecoder(token: await _localDbService.getSecurityToken());
     if (await token.isExpired()) {
-      _authToken = null;
+      _authInstance = null;
       return null;
     }
-    _authToken = token.token;
+    _authInstance = token.token;
     return token;
   }
 
@@ -1704,14 +1704,11 @@ class WooCommerceSdk {
     } else {
       this.apiPath = DEFAULT_WC_API_PATH;
     }
-    //List<Map>param = [];
-    // queryParameters.forEach((k, v) => param.add({k : v})); print(param.toString());
-    getAuthTokenInstance();
+    getAuthInstance();
     queryUri = new Uri(
         path: path, queryParameters: queryParameters, port: port, host: host);
-
     _printDebug('Query : ' + queryUri.toString());
-    //queryUri = new Uri.http( path, param);
+
     return queryUri.toString();
   }
 
