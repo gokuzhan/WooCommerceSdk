@@ -5,7 +5,7 @@ void main() {
   test('adds one to input values', () async {
     final Jwt = WCJwtDecoder(
         token:
-            "eyJ0eXAiOiJKV1QiCJhbGciOiJIUzI1NiJ9.ejE1OTY4MTc5MDcsInN1YiI6MTJ9.YWHY28YpWtYIWTSd_IBqztNOFQAGgv4tjLhESPwDftg");
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTY4ODcxMDAsInN1YiI6MTJ9.Bp5m6eBRlpT-wQOY88Hvv7qtDAQ36cLDGLX0GLD0tCw");
 
     print(await Jwt.decode());
   });
