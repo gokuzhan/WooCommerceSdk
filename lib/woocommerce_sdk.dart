@@ -1681,7 +1681,7 @@ class WooCommerceSdk {
 
   Future<Auth> getAuthInstance() async {
     final Auth auth = new Auth(token: await _localDbService.getSecurityToken());
-    print(auth);
+
     if (await auth.isExpired) {
       _authInstance = null;
       return null;
@@ -1704,7 +1704,6 @@ class WooCommerceSdk {
     } else {
       this.apiPath = DEFAULT_WC_API_PATH;
     }
-    await getAuthInstance();
     queryUri = new Uri(
         path: path, queryParameters: queryParameters, port: port, host: host);
     _printDebug('Query : ' + queryUri.toString());

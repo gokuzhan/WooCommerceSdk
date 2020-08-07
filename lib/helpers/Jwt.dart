@@ -44,7 +44,6 @@ class WCJwtDecoder {
         throw new WCError("jwt_malformed", "JWT token malformed", null);
       }
     } catch (error) {
-      print(error);
       throw new WCError(error.code, error.message, null);
     }
   }
