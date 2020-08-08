@@ -6,19 +6,19 @@ part of 'WCJwtResponse.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-WCJwtResponse _$WCJwtResponseFromJson(Map<String, dynamic> json) {
-  return WCJwtResponse(
-    json['token'] as String,
-    json['userEmail'] as String,
-    json['userNicename'] as String,
-    json['userDisplayName'] as String,
+WCAuthResponse _$WCJwtResponseFromJson(Map<String, dynamic> json) {
+  return WCAuthResponse(
+    json['wp_user'] as Map<String, dynamic>,
+    json['access_token'] as String,
+    json['refresh_token'] as String,
+    json['expires_in'] as int,
   );
 }
 
-Map<String, dynamic> _$WCJwtResponseToJson(WCJwtResponse instance) =>
+Map<String, dynamic> _$WCJwtResponseToJson(WCAuthResponse instance) =>
     <String, dynamic>{
-      'token': instance.token,
-      'userEmail': instance.userEmail,
-      'userNicename': instance.userNicename,
-      'userDisplayName': instance.userDisplayName,
+      'wp_user': instance.wp_user,
+      'access_token': instance.access_token,
+      'refresh_token': instance.refresh_token,
+      'expires_in': instance.expires_in,
     };

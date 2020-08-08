@@ -1,16 +1,31 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalDatabaseService {
-  updateSecurityToken(String token) async {
-    (await SharedPreferences.getInstance()).setString('token', token);
+  updateSecurityAccess(String token) async {
+    (await SharedPreferences.getInstance()).setString('access_token', token);
+  }
+
+  updateSecurityRefresh(String refresh) async {
+    (await SharedPreferences.getInstance()).setString('refresh_token', refresh);
   }
 
   deleteSecurityToken() async {
-    (await SharedPreferences.getInstance()).remove('token');
+    (await SharedPreferences.getInstance()).remove('access_token');
+    (await SharedPreferences.getInstance()).remove('refresh_token');
   }
 
-  Future<String> getSecurityToken() async {
-    final token = (await SharedPreferences.getInstance()).getString('token');
+  Future<String> getSecurityAccess() async {
+    final token =
+        (await SharedPreferences.getInstance()).getString('access_token');
+    if (token == null) {
+      return '0';
+    }
+    return token;
+  }
+
+  Future<String> getSecurityRefresh() async {
+    final token =
+        (await SharedPreferences.getInstance()).getString('refresh_token');
     if (token == null) {
       return '0';
     }

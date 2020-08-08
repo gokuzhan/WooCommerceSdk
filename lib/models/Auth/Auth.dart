@@ -6,12 +6,13 @@ part 'Auth.g.dart';
 @JsonSerializable()
 class Auth {
   static WCJwtDecoder _jwtInstance;
+  final String access_token;
+  final String refresh_token;
+  final String expires_in;
 
-  Auth({token}) {
-    _jwtInstance = new WCJwtDecoder(token: token);
+  Auth(this.access_token, this.refresh_token, this.expires_in) {
+    _jwtInstance = new WCJwtDecoder(token: this.access_token);
   }
-
-  String get token => _jwtInstance.token;
 
   Future<Map<String, dynamic>> get decoded async => await _jwtInstance.decode();
 

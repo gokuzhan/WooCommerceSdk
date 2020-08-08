@@ -57,6 +57,10 @@ class WCJwtDecoder {
  *
  * Response Model
  * ------------------------------------
+ *
+ * LOGIN
+ * ### POST /api-bearer-auth/v1/login
+ *
  * {
     "wp_user": {
     "data": {
@@ -74,6 +78,15 @@ class WCJwtDecoder {
     "access_token": "your_access_token",
     "expires_in": 86400, // number of seconds
     "refresh_token": "your_refresh_token"
+    }
+ *
+ *
+ * REFRESH LOGIN
+ * ### POST /api-bearer-auth/v1/tokens/refresh
+ *
+ * {
+    "access_token": "your_new_access_token",
+    "expires_in": 86400
     }
  *
  */
