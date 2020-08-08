@@ -18,7 +18,9 @@ class Auth {
 
   Future<bool> get isExpired async => await _jwtInstance.isExpired();
 
-  Future<int> get customerId async => (await decoded)["sub"];
+  Future<int> get customerId async => (await decoded)["sub"].runtimeType != int
+      ? int.parse((await decoded)["sub"])
+      : (await decoded)["sub"];
 
   factory Auth.fromJson(Map<String, dynamic> json) => _$AuthFromJson(json);
 
