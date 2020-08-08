@@ -180,6 +180,22 @@ class WooCommerceSdk {
   Future<Auth> getAuthInstance() async {
     // customer logged
     if (await isCustomerLoggedIn()) {
+      // if auth is null
+      if (!(authInstance != null)) {
+        // preparing auth refreshing payload
+        final body = {'token': await _localDbService.getSecurityRefresh()};
+        // making request for refreshing auth
+        final response = await http.post(this.baseUrl + URL_AUTH_TOKEN_REFRESH,
+            body: json.encode(body),
+            headers: {'Content-Type': 'application/json'});
+        if (response.statusCode >= 200 && response.statusCode < 300) {
+          this.setAuth = Auth.fromJson(json.decode(response.body));
+        } else {
+          // bad status
+          throw new WCError.fromJson(json.decode(response.body));
+        }
+      }
+
       // customer access is expired
       if (await authInstance.isExpired) {
         // preparing auth refreshing payload
@@ -192,7 +208,7 @@ class WooCommerceSdk {
         // status should be success
         if (response.statusCode >= 200 && response.statusCode < 300) {
           WCAuthResponse authResponse =
-          WCAuthResponse.fromJson(json.decode(response.body));
+              WCAuthResponse.fromJson(json.decode(response.body));
           this.setAuth = Auth.fromJson(authResponse.toJson());
           // updating the security access `access_token`
           _localDbService.updateSecurityAccess(authInstance.access_token);
