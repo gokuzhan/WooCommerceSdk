@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'WCProductMetaData.g.dart';
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class WCProductMetaData {
   final int id;
   final String key;
