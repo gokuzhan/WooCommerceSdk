@@ -10,7 +10,7 @@ WCProductMetaData _$WCProductMetaDataFromJson(Map<String, dynamic> json) {
   return WCProductMetaData(
     json['id'] as int,
     json['key'] as String,
-    json['value'] as String,
+    json['value'],
   );
 }
 
