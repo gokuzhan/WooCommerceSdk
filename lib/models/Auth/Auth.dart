@@ -8,7 +8,7 @@ class Auth {
   static WCJwtDecoder _jwtInstance;
   final String access_token;
   final String refresh_token;
-  final String expires_in;
+  final int expires_in;
 
   Auth(this.access_token, this.refresh_token, this.expires_in) {
     _jwtInstance = new WCJwtDecoder(token: this.access_token);
@@ -18,7 +18,7 @@ class Auth {
 
   Future<bool> get isExpired async => await _jwtInstance.isExpired();
 
-  Future<String> get customerId async => (await decoded)["sub"];
+  Future<int> get customerId async => (await decoded)["sub"];
 
   factory Auth.fromJson(Map<String, dynamic> json) => _$AuthFromJson(json);
 

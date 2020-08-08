@@ -136,20 +136,18 @@ class WooCommerceSdk {
   LocalDatabaseService _localDbService = new LocalDatabaseService();
 
   /// Associated endpoint : yourwebsite.com/wp-json/api-bearer-auth/v1/auth
-  Future authenticateWithJwt({String username, String password}) async {
+  Future<Auth> authenticateWithJwt({String username, String password}) async {
     final body = {
       'username': username,
       'password': password,
     };
 
-    final response = await http.post(
-      this.baseUrl + URL_AUTH_TOKEN,
-      body: body,
-    );
+    final response = await http.post(this.baseUrl + URL_AUTH_TOKEN,
+        body: json.encode(body), headers: {'Content-Type': 'application/json'});
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
       WCAuthResponse authResponse =
-          WCAuthResponse.fromJson(json.decode(response.body));
+      WCAuthResponse.fromJson(json.decode(response.body));
       // checking customer capabilities
       final capabilities = authResponse.wp_user["caps"];
       if (capabilities != null && capabilities["customer"] == true) {
@@ -186,10 +184,9 @@ class WooCommerceSdk {
         // preparing auth refreshing payload
         final body = {'token': _authInstance.refresh_token};
         // making request for refreshing auth
-        final response = await http.post(
-          this.baseUrl + URL_AUTH_TOKEN_REFRESH,
-          body: body,
-        );
+        final response = await http.post(this.baseUrl + URL_AUTH_TOKEN_REFRESH,
+            body: json.encode(body),
+            headers: {'Content-Type': 'application/json'});
 
         // status should be success
         if (response.statusCode >= 200 && response.statusCode < 300) {
@@ -960,9 +957,13 @@ class WooCommerceSdk {
     await getAuthInstance();
     _urlHeader['Authorization'] = 'Bearer ' + _authInstance.access_token;
     final response = await http.post(
-        this.baseUrl + URL_STORE_API_PATH + 'cart/items',
-        headers: _urlHeader,
-        body: data);
+      this.baseUrl + URL_STORE_API_PATH + 'cart/items',
+      headers: {
+        'Content-Type': 'application/json',
+        ..._urlHeader,
+      },
+      body: json.encode(data),
+    );
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
       final jsonStr = json.decode(response.body);

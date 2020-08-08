@@ -10,7 +10,7 @@ Auth _$AuthFromJson(Map<String, dynamic> json) {
   return Auth(
     json['access_token'] as String,
     json['refresh_token'] as String,
-    json['expires_in'] as String,
+    json['expires_in'] as int,
   );
 }
 
