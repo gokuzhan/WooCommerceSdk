@@ -123,6 +123,7 @@ class WooCommerceSdk {
   Auth _authInstance;
 
   Auth get authInstance => _authInstance;
+  set setAuth(Auth auth) => {_authInstance = auth};
 
   Uri queryUri;
 
@@ -147,16 +148,16 @@ class WooCommerceSdk {
 
     if (response.statusCode >= 200 && response.statusCode < 300) {
       WCAuthResponse authResponse =
-      WCAuthResponse.fromJson(json.decode(response.body));
+          WCAuthResponse.fromJson(json.decode(response.body));
       // checking customer capabilities
       final capabilities = authResponse.wp_user["caps"];
       if (capabilities != null && capabilities["customer"] == true) {
-        _authInstance = Auth.fromJson(authResponse.toJson());
-        _localDbService.updateSecurityAccess(_authInstance.access_token);
-        _localDbService.updateSecurityRefresh(_authInstance.refresh_token);
+        this.setAuth = Auth.fromJson(authResponse.toJson());
+        _localDbService.updateSecurityAccess(authInstance.access_token);
+        _localDbService.updateSecurityRefresh(authInstance.refresh_token);
         _urlHeader['Authorization'] =
             'Bearer ${_localDbService.getSecurityAccess()}';
-        return _authInstance;
+        return authInstance;
       }
       throw new WCError(
           "not_customer", "Authorized user is not a customer ", null);
@@ -180,9 +181,9 @@ class WooCommerceSdk {
     // customer logged
     if (await isCustomerLoggedIn()) {
       // customer access is expired
-      if (await _authInstance.isExpired) {
+      if (await authInstance.isExpired) {
         // preparing auth refreshing payload
-        final body = {'token': _authInstance.refresh_token};
+        final body = {'token': authInstance.refresh_token};
         // making request for refreshing auth
         final response = await http.post(this.baseUrl + URL_AUTH_TOKEN_REFRESH,
             body: json.encode(body),
@@ -192,17 +193,17 @@ class WooCommerceSdk {
         if (response.statusCode >= 200 && response.statusCode < 300) {
           WCAuthResponse authResponse =
           WCAuthResponse.fromJson(json.decode(response.body));
-          _authInstance = Auth.fromJson(authResponse.toJson());
+          this.setAuth = Auth.fromJson(authResponse.toJson());
           // updating the security access `access_token`
-          _localDbService.updateSecurityAccess(_authInstance.access_token);
+          _localDbService.updateSecurityAccess(authInstance.access_token);
           _urlHeader['Authorization'] = 'Bearer ${authResponse.access_token}';
-          return _authInstance;
+          return authInstance;
         } else {
           // bad status
           throw new WCError.fromJson(json.decode(response.body));
         }
       } else {
-        return _authInstance;
+        return authInstance;
       }
     } else {
       _localDbService.deleteSecurityToken();
@@ -955,7 +956,7 @@ class WooCommerceSdk {
     };
     if (variations != null) data['variations'] = variations;
     await getAuthInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + _authInstance.access_token;
+    _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
     final response = await http.post(
       this.baseUrl + URL_STORE_API_PATH + 'cart/items',
       headers: {
@@ -982,7 +983,7 @@ class WooCommerceSdk {
 
   Future<List<WCCartItem>> getMyCartItems() async {
     await getAuthInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + _authInstance.access_token;
+    _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
     final response = await http.get(
         this.baseUrl + URL_STORE_API_PATH + 'cart/items',
         headers: _urlHeader);
@@ -1010,7 +1011,7 @@ class WooCommerceSdk {
 
   Future<WCCart> getMyCart() async {
     await getAuthInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + _authInstance.access_token;
+    _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
     WCCart cart;
     final response = await http.get(this.baseUrl + URL_STORE_API_PATH + 'cart',
         headers: _urlHeader);
@@ -1032,7 +1033,7 @@ class WooCommerceSdk {
     };
     _printDebug('Deleting CartItem With Payload : ' + data.toString());
     await getAuthInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + _authInstance.access_token;
+    _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
 
     final http.Response response = await http.delete(
       this.baseUrl + URL_STORE_API_PATH + 'cart/items/' + key,
@@ -1056,7 +1057,7 @@ class WooCommerceSdk {
 
   Future deleteAllMyCartItems() async {
     await getAuthInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + _authInstance.access_token;
+    _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
 
     final http.Response response = await http.delete(
       this.baseUrl + URL_STORE_API_PATH + 'cart/items/',
@@ -1076,7 +1077,7 @@ class WooCommerceSdk {
 
   Future<WCCartItem> getMyCartItemByKey(String key) async {
     await getAuthInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + _authInstance.access_token;
+    _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
     WCCartItem cartItem;
     final response = await http.get(
         this.baseUrl + URL_STORE_API_PATH + 'cart/items/' + key,
@@ -1105,7 +1106,7 @@ class WooCommerceSdk {
     };
     if (variations != null) data['variations'] = variations;
     await getAuthInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + _authInstance.access_token;
+    _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
     final response = await http.put(
         this.baseUrl + URL_STORE_API_PATH + 'cart/items/' + key,
         headers: _urlHeader,
