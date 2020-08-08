@@ -8,25 +8,25 @@ part of 'WCOrderPayload.dart';
 
 WCOrderPayload _$WCOrderPayloadFromJson(Map<String, dynamic> json) {
   return WCOrderPayload(
-    json['paymentMethod'] as String,
-    json['paymentMethodTitle'] as String,
-    json['setPaid'] as bool,
+    json['payment_method'] as String,
+    json['payment_method_title'] as String,
+    json['set_paid'] as bool,
     json['status'] as String,
     json['currency'] as String,
-    json['customerId'] as int,
-    json['customerNote'] as String,
-    json['parentId'] as int,
-    (json['metaData'] as List)
+    json['customer_id'] as int,
+    json['customer_note'] as String,
+    json['parent_id'] as int,
+    (json['meta_data'] as List)
         ?.map((e) => e == null
             ? null
             : WCOrderPayloadMetaData.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-    (json['feeLines'] as List)
+    (json['fee_lines'] as List)
         ?.map((e) => e == null
             ? null
             : WCOrderPayloadFeeLines.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-    (json['couponLines'] as List)
+    (json['coupon_lines'] as List)
         ?.map((e) => e == null
             ? null
             : WCOrderPayloadCouponLines.fromJson(e as Map<String, dynamic>))
@@ -39,12 +39,12 @@ WCOrderPayload _$WCOrderPayloadFromJson(Map<String, dynamic> json) {
         ? null
         : WCOrderPayloadShipping.fromJson(
             json['shipping'] as Map<String, dynamic>),
-    (json['lineItems'] as List)
+    (json['line_items'] as List)
         ?.map((e) => e == null
             ? null
             : PayloadLineItems.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-    (json['shippingLines'] as List)
+    (json['shipping_lines'] as List)
         ?.map((e) => e == null
             ? null
             : PayloadShippingLines.fromJson(e as Map<String, dynamic>))
@@ -54,19 +54,19 @@ WCOrderPayload _$WCOrderPayloadFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$WCOrderPayloadToJson(WCOrderPayload instance) =>
     <String, dynamic>{
-      'paymentMethod': instance.paymentMethod,
-      'paymentMethodTitle': instance.paymentMethodTitle,
-      'setPaid': instance.setPaid,
+      'payment_method': instance.paymentMethod,
+      'payment_method_title': instance.paymentMethodTitle,
+      'set_paid': instance.setPaid,
       'status': instance.status,
       'currency': instance.currency,
-      'customerId': instance.customerId,
-      'customerNote': instance.customerNote,
-      'parentId': instance.parentId,
-      'metaData': instance.metaData,
-      'feeLines': instance.feeLines,
-      'couponLines': instance.couponLines,
+      'customer_id': instance.customerId,
+      'customer_note': instance.customerNote,
+      'parent_id': instance.parentId,
+      'meta_data': instance.metaData,
+      'fee_lines': instance.feeLines,
+      'coupon_lines': instance.couponLines,
       'billing': instance.billing,
       'shipping': instance.shipping,
-      'lineItems': instance.lineItems,
-      'shippingLines': instance.shippingLines,
+      'line_items': instance.lineItems,
+      'shipping_lines': instance.shippingLines,
     };

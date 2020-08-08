@@ -4,7 +4,7 @@ import 'WCShippingMethodShippingClasses.dart';
 
 part 'WCShippingMethodFlatRate.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCShippingMethodFlatRate {
   final int id;
   final String title;

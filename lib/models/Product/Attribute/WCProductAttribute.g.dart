@@ -12,8 +12,8 @@ WCProductAttribute _$WCProductAttributeFromJson(Map<String, dynamic> json) {
     json['name'] as String,
     json['slug'] as String,
     json['type'] as String,
-    json['orderBy'] as String,
-    json['hasArchives'] as bool,
+    json['order_by'] as String,
+    json['has_archives'] as bool,
     json['links'] == null
         ? null
         : WCProductAttributeTermLinks.fromJson(
@@ -27,7 +27,7 @@ Map<String, dynamic> _$WCProductAttributeToJson(WCProductAttribute instance) =>
       'name': instance.name,
       'slug': instance.slug,
       'type': instance.type,
-      'orderBy': instance.orderBy,
-      'hasArchives': instance.hasArchives,
+      'order_by': instance.orderBy,
+      'has_archives': instance.hasArchives,
       'links': instance.links,
     };

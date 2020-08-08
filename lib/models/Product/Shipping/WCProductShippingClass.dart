@@ -4,7 +4,7 @@ import 'WCProductShippingClassLinks.dart';
 
 part 'WCProductShippingClass.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCProductShippingClass {
   final int id;
   final String name;

@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'WCShippingZoneMethodCost.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCShippingZoneMethodCost {
   final String id;
   final String label;

@@ -4,7 +4,7 @@ import 'WCCustomerDownloadFile.dart';
 
 part 'WCCustomerDownload.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCCustomerDownload {
   final String downloadId;
   final String downloadUrl;

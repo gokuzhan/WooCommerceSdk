@@ -14,7 +14,7 @@ WCShippingZoneMethodCost _$WCShippingZoneMethodCostFromJson(
     json['description'] as String,
     json['type'] as String,
     json['value'] as String,
-    json['costDefault'] as String,
+    json['cost_default'] as String,
     json['tip'] as String,
     json['placeholder'] as String,
   );
@@ -28,7 +28,7 @@ Map<String, dynamic> _$WCShippingZoneMethodCostToJson(
       'description': instance.description,
       'type': instance.type,
       'value': instance.value,
-      'costDefault': instance.costDefault,
+      'cost_default': instance.costDefault,
       'tip': instance.tip,
       'placeholder': instance.placeholder,
     };

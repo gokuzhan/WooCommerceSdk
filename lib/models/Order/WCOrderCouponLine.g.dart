@@ -11,8 +11,8 @@ WCOrderCouponLine _$WCOrderCouponLineFromJson(Map<String, dynamic> json) {
     json['id'] as int,
     json['code'] as String,
     json['discount'] as String,
-    json['discountTax'] as String,
-    (json['metaData'] as List)
+    json['discount_tax'] as String,
+    (json['meta_data'] as List)
         ?.map((e) =>
             e == null ? null : MetaData.fromJson(e as Map<String, dynamic>))
         ?.toList(),
@@ -24,6 +24,6 @@ Map<String, dynamic> _$WCOrderCouponLineToJson(WCOrderCouponLine instance) =>
       'id': instance.id,
       'code': instance.code,
       'discount': instance.discount,
-      'discountTax': instance.discountTax,
-      'metaData': instance.metaData,
+      'discount_tax': instance.discountTax,
+      'meta_data': instance.metaData,
     };

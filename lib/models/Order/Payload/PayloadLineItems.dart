@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'PayloadLineItems.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class PayloadLineItems {
   final int productId;
   final String name;

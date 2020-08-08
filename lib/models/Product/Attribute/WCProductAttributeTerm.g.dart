@@ -13,7 +13,7 @@ WCProductAttributeTerm _$WCProductAttributeTermFromJson(
     json['name'] as String,
     json['slug'] as String,
     json['description'] as String,
-    json['menuOrder'] as int,
+    json['menu_order'] as int,
     json['count'] as int,
     json['links'] == null
         ? null
@@ -29,7 +29,7 @@ Map<String, dynamic> _$WCProductAttributeTermToJson(
       'name': instance.name,
       'slug': instance.slug,
       'description': instance.description,
-      'menuOrder': instance.menuOrder,
+      'menu_order': instance.menuOrder,
       'count': instance.count,
       'links': instance.links,
     };

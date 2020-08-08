@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'WCError.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCError {
   final String code;
   final String message;

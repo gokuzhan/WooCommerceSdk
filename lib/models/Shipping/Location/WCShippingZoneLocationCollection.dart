@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'WCShippingZoneLocationCollection.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCShippingZoneLocationCollection {
   final String href;
 

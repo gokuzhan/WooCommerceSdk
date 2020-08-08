@@ -6,7 +6,7 @@ import 'WCProductReviewUp.dart';
 
 part 'WCProductReviewLinks.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCProductReviewLinks {
   final List<WCProductReviewSelf> self;
   final List<WCProductReviewCollection> collection;

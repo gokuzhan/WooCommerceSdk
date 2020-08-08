@@ -19,7 +19,7 @@ WCTaxRate _$WCTaxRateFromJson(Map<String, dynamic> json) {
     json['compound'] as bool,
     json['shipping'] as bool,
     json['order'] as int,
-    json['taxClass'] as String,
+    json['tax_class'] as String,
     json['links'] == null
         ? null
         : WCTaxRateLinks.fromJson(json['links'] as Map<String, dynamic>),
@@ -38,6 +38,6 @@ Map<String, dynamic> _$WCTaxRateToJson(WCTaxRate instance) => <String, dynamic>{
       'compound': instance.compound,
       'shipping': instance.shipping,
       'order': instance.order,
-      'taxClass': instance.taxClass,
+      'tax_class': instance.taxClass,
       'links': instance.links,
     };

@@ -5,7 +5,7 @@ import '../Self.dart';
 
 part 'WCCouponLinks.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCCouponLinks {
   final List<Self> self;
   final List<Collection> collection;

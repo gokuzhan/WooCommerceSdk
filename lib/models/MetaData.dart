@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'MetaData.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class MetaData {
   final int id;
   final String key;

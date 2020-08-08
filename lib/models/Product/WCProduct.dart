@@ -11,7 +11,7 @@ import 'WCProductMetaData.dart';
 
 part 'WCProduct.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCProduct {
   final int id;
   final String name;

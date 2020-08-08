@@ -5,7 +5,7 @@ import 'FeeLineTax.dart';
 
 part 'WCOrderFeeLine.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCOrderFeeLine {
   final int id;
   final String name;

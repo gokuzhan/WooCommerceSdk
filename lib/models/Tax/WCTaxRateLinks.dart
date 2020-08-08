@@ -5,7 +5,7 @@ import 'WCTaxRateSelf.dart';
 
 part 'WCTaxRateLinks.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCTaxRateLinks {
   final List<WCTaxRateSelf> self;
   final List<WCTaxRateCollection> collection;

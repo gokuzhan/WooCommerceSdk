@@ -9,37 +9,37 @@ part of 'WCProductVariation.dart';
 WCProductVariation _$WCProductVariationFromJson(Map<String, dynamic> json) {
   return WCProductVariation(
     json['id'] as int,
-    json['dateCreated'] == null
+    json['date_created'] == null
         ? null
-        : DateTime.parse(json['dateCreated'] as String),
-    json['dateCreatedGmt'] == null
+        : DateTime.parse(json['date_created'] as String),
+    json['date_created_gmt'] == null
         ? null
-        : DateTime.parse(json['dateCreatedGmt'] as String),
-    json['dateModified'] == null
+        : DateTime.parse(json['date_created_gmt'] as String),
+    json['date_modified'] == null
         ? null
-        : DateTime.parse(json['dateModified'] as String),
-    json['dateModifiedGmt'] == null
+        : DateTime.parse(json['date_modified'] as String),
+    json['date_modified_gmt'] == null
         ? null
-        : DateTime.parse(json['dateModifiedGmt'] as String),
+        : DateTime.parse(json['date_modified_gmt'] as String),
     json['description'] as String,
     json['permalink'] as String,
     json['sku'] as String,
     json['price'] as String,
-    json['regularPrice'] as String,
-    json['salePrice'] as String,
-    json['dateOnSaleFrom'] == null
+    json['regular_price'] as String,
+    json['sale_price'] as String,
+    json['date_on_sale_from'] == null
         ? null
-        : DateTime.parse(json['dateOnSaleFrom'] as String),
-    json['dateOnSaleFromGmt'] == null
+        : DateTime.parse(json['date_on_sale_from'] as String),
+    json['date_on_sale_from_gmt'] == null
         ? null
-        : DateTime.parse(json['dateOnSaleFromGmt'] as String),
-    json['dateOnSaleTo'] == null
+        : DateTime.parse(json['date_on_sale_from_gmt'] as String),
+    json['date_on_sale_to'] == null
         ? null
-        : DateTime.parse(json['dateOnSaleTo'] as String),
-    json['dateOnSaleToGmt'] == null
+        : DateTime.parse(json['date_on_sale_to'] as String),
+    json['date_on_sale_to_gmt'] == null
         ? null
-        : DateTime.parse(json['dateOnSaleToGmt'] as String),
-    json['onSale'] as bool,
+        : DateTime.parse(json['date_on_sale_to_gmt'] as String),
+    json['on_sale'] as bool,
     json['status'] as String,
     json['purchasable'] as bool,
     json['virtual'] as bool,
@@ -49,15 +49,15 @@ WCProductVariation _$WCProductVariationFromJson(Map<String, dynamic> json) {
             ? null
             : WCProductVariationDownload.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-    json['downloadLimit'] as int,
-    json['downloadExpiry'] as int,
-    json['taxStatus'] as String,
-    json['taxClass'] as String,
-    json['manageStock'] as bool,
-    json['stockQuantity'] as int,
-    json['stockStatus'] as String,
+    json['download_limit'] as int,
+    json['download_expiry'] as int,
+    json['tax_status'] as String,
+    json['tax_class'] as String,
+    json['manage_stock'] as bool,
+    json['stock_quantity'] as int,
+    json['stock_status'] as String,
     json['backorders'] as String,
-    json['backordersAllowed'] as bool,
+    json['backorders_allowed'] as bool,
     json['backordered'] as bool,
     (json['attributes'] as List)
         ?.map((e) => e == null
@@ -65,14 +65,14 @@ WCProductVariation _$WCProductVariationFromJson(Map<String, dynamic> json) {
             : WCProductVariationAttribute.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     json['weight'] as String,
-    json['shippingClass'] as String,
-    json['shippingClassId'] as int,
-    json['menuOrder'] as int,
+    json['shipping_class'] as String,
+    json['shipping_class_id'] as int,
+    json['menu_order'] as int,
     json['dimensions'] == null
         ? null
         : WCProductVariationDimension.fromJson(
             json['dimensions'] as Map<String, dynamic>),
-    (json['metaData'] as List)
+    (json['meta_data'] as List)
         ?.map((e) => e == null
             ? null
             : WCProductVariationMetaData.fromJson(e as Map<String, dynamic>))
@@ -87,42 +87,42 @@ WCProductVariation _$WCProductVariationFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$WCProductVariationToJson(WCProductVariation instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'dateCreated': instance.dateCreated?.toIso8601String(),
-      'dateCreatedGmt': instance.dateCreatedGmt?.toIso8601String(),
-      'dateModified': instance.dateModified?.toIso8601String(),
-      'dateModifiedGmt': instance.dateModifiedGmt?.toIso8601String(),
+      'date_created': instance.dateCreated?.toIso8601String(),
+      'date_created_gmt': instance.dateCreatedGmt?.toIso8601String(),
+      'date_modified': instance.dateModified?.toIso8601String(),
+      'date_modified_gmt': instance.dateModifiedGmt?.toIso8601String(),
       'description': instance.description,
       'permalink': instance.permalink,
       'sku': instance.sku,
       'price': instance.price,
-      'regularPrice': instance.regularPrice,
-      'salePrice': instance.salePrice,
-      'dateOnSaleFrom': instance.dateOnSaleFrom?.toIso8601String(),
-      'dateOnSaleFromGmt': instance.dateOnSaleFromGmt?.toIso8601String(),
-      'dateOnSaleTo': instance.dateOnSaleTo?.toIso8601String(),
-      'dateOnSaleToGmt': instance.dateOnSaleToGmt?.toIso8601String(),
-      'onSale': instance.onSale,
+      'regular_price': instance.regularPrice,
+      'sale_price': instance.salePrice,
+      'date_on_sale_from': instance.dateOnSaleFrom?.toIso8601String(),
+      'date_on_sale_from_gmt': instance.dateOnSaleFromGmt?.toIso8601String(),
+      'date_on_sale_to': instance.dateOnSaleTo?.toIso8601String(),
+      'date_on_sale_to_gmt': instance.dateOnSaleToGmt?.toIso8601String(),
+      'on_sale': instance.onSale,
       'status': instance.status,
       'purchasable': instance.purchasable,
       'virtual': instance.virtual,
       'downloadable': instance.downloadable,
       'downloads': instance.downloads,
-      'downloadLimit': instance.downloadLimit,
-      'downloadExpiry': instance.downloadExpiry,
-      'taxStatus': instance.taxStatus,
-      'taxClass': instance.taxClass,
-      'manageStock': instance.manageStock,
-      'stockQuantity': instance.stockQuantity,
-      'stockStatus': instance.stockStatus,
+      'download_limit': instance.downloadLimit,
+      'download_expiry': instance.downloadExpiry,
+      'tax_status': instance.taxStatus,
+      'tax_class': instance.taxClass,
+      'manage_stock': instance.manageStock,
+      'stock_quantity': instance.stockQuantity,
+      'stock_status': instance.stockStatus,
       'backorders': instance.backorders,
-      'backordersAllowed': instance.backordersAllowed,
+      'backorders_allowed': instance.backordersAllowed,
       'backordered': instance.backordered,
       'attributes': instance.attributes,
       'weight': instance.weight,
-      'shippingClass': instance.shippingClass,
-      'shippingClassId': instance.shippingClassId,
-      'menuOrder': instance.menuOrder,
+      'shipping_class': instance.shippingClass,
+      'shipping_class_id': instance.shippingClassId,
+      'menu_order': instance.menuOrder,
       'dimensions': instance.dimensions,
-      'metaData': instance.metaData,
+      'meta_data': instance.metaData,
       'image': instance.image,
     };

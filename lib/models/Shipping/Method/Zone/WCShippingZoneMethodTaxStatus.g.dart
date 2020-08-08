@@ -14,7 +14,7 @@ WCShippingZoneMethodTaxStatus _$WCShippingZoneMethodTaxStatusFromJson(
     json['description'] as String,
     json['type'] as String,
     json['value'] as String,
-    json['taxDefault'] as String,
+    json['tax_default'] as String,
     json['tip'] as String,
     json['placeholder'] as String,
     json['options'] == null
@@ -32,7 +32,7 @@ Map<String, dynamic> _$WCShippingZoneMethodTaxStatusToJson(
       'description': instance.description,
       'type': instance.type,
       'value': instance.value,
-      'taxDefault': instance.taxDefault,
+      'tax_default': instance.taxDefault,
       'tip': instance.tip,
       'placeholder': instance.placeholder,
       'options': instance.options,

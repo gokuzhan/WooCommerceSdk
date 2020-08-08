@@ -8,8 +8,8 @@ part of 'Billing.dart';
 
 Billing _$BillingFromJson(Map<String, dynamic> json) {
   return Billing(
-    json['firstName'] as String,
-    json['lastName'] as String,
+    json['first_name'] as String,
+    json['last_name'] as String,
     json['company'] as String,
     json['address1'] as String,
     json['address2'] as String,
@@ -23,8 +23,8 @@ Billing _$BillingFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$BillingToJson(Billing instance) => <String, dynamic>{
-      'firstName': instance.firstName,
-      'lastName': instance.lastName,
+      'first_name': instance.firstName,
+      'last_name': instance.lastName,
       'company': instance.company,
       'address1': instance.address1,
       'address2': instance.address2,

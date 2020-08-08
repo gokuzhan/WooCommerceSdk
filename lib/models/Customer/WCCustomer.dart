@@ -7,7 +7,7 @@ import 'WCCustomerMetaData.dart';
 
 part 'WCCustomer.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCCustomer {
   final int id;
   final String dateCreated;

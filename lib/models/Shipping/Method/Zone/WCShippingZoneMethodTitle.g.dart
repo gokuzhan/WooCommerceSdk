@@ -14,7 +14,7 @@ WCShippingZoneMethodTitle _$WCShippingZoneMethodTitleFromJson(
     json['description'] as String,
     json['type'] as String,
     json['value'] as String,
-    json['titleDefault'] as String,
+    json['title_default'] as String,
     json['tip'] as String,
     json['placeholder'] as String,
   );
@@ -28,7 +28,7 @@ Map<String, dynamic> _$WCShippingZoneMethodTitleToJson(
       'description': instance.description,
       'type': instance.type,
       'value': instance.value,
-      'titleDefault': instance.titleDefault,
+      'title_default': instance.titleDefault,
       'tip': instance.tip,
       'placeholder': instance.placeholder,
     };

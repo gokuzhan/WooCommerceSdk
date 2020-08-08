@@ -3,7 +3,7 @@ import 'package:woocommerce_sdk/woocommerce_sdk.dart';
 
 part 'Auth.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Auth {
   static WCJwtDecoder _jwtInstance;
   final String access_token;

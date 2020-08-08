@@ -4,7 +4,7 @@ import 'WCOrderPayloadMetaData.dart';
 
 part 'WCOrderPayloadCouponLines.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCOrderPayloadCouponLines {
   String code;
   List<WCOrderPayloadMetaData> metaData;

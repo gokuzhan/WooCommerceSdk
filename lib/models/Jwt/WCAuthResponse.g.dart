@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'WCJwtResponse.dart';
+part of 'WCAuthResponse.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-WCAuthResponse _$WCJwtResponseFromJson(Map<String, dynamic> json) {
+WCAuthResponse _$WCAuthResponseFromJson(Map<String, dynamic> json) {
   return WCAuthResponse(
     json['wp_user'] as Map<String, dynamic>,
     json['access_token'] as String,
@@ -15,7 +15,7 @@ WCAuthResponse _$WCJwtResponseFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$WCJwtResponseToJson(WCAuthResponse instance) =>
+Map<String, dynamic> _$WCAuthResponseToJson(WCAuthResponse instance) =>
     <String, dynamic>{
       'wp_user': instance.wp_user,
       'access_token': instance.access_token,

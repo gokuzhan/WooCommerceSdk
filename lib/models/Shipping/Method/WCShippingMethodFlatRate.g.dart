@@ -11,12 +11,12 @@ WCShippingMethodFlatRate _$WCShippingMethodFlatRateFromJson(
   return WCShippingMethodFlatRate(
     json['id'] as int,
     json['title'] as String,
-    json['methodId'] as String,
+    json['method_id'] as String,
     json['cost'] as String,
-    json['classCost'] as String,
-    json['calculationType'] as String,
+    json['class_cost'] as String,
+    json['calculation_type'] as String,
     json['taxable'] as bool,
-    (json['shippingClasses'] as List)
+    (json['shipping_classes'] as List)
         ?.map((e) => e == null
             ? null
             : WCShippingMethodShippingClasses.fromJson(
@@ -30,10 +30,10 @@ Map<String, dynamic> _$WCShippingMethodFlatRateToJson(
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
-      'methodId': instance.methodId,
+      'method_id': instance.methodId,
       'cost': instance.cost,
-      'classCost': instance.classCost,
-      'calculationType': instance.calculationType,
+      'class_cost': instance.classCost,
+      'calculation_type': instance.calculationType,
       'taxable': instance.taxable,
-      'shippingClasses': instance.shippingClasses,
+      'shipping_classes': instance.shippingClasses,
     };

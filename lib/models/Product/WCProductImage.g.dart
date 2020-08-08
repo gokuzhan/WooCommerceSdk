@@ -9,18 +9,18 @@ part of 'WCProductImage.dart';
 WCProductImage _$WCProductImageFromJson(Map<String, dynamic> json) {
   return WCProductImage(
     json['id'] as int,
-    json['dateCreated'] == null
+    json['date_created'] == null
         ? null
-        : DateTime.parse(json['dateCreated'] as String),
-    json['dateCreatedGMT'] == null
+        : DateTime.parse(json['date_created'] as String),
+    json['date_created_g_m_t'] == null
         ? null
-        : DateTime.parse(json['dateCreatedGMT'] as String),
-    json['dateModified'] == null
+        : DateTime.parse(json['date_created_g_m_t'] as String),
+    json['date_modified'] == null
         ? null
-        : DateTime.parse(json['dateModified'] as String),
-    json['dateModifiedGMT'] == null
+        : DateTime.parse(json['date_modified'] as String),
+    json['date_modified_g_m_t'] == null
         ? null
-        : DateTime.parse(json['dateModifiedGMT'] as String),
+        : DateTime.parse(json['date_modified_g_m_t'] as String),
     json['src'] as String,
     json['name'] as String,
     json['alt'] as String,
@@ -30,10 +30,10 @@ WCProductImage _$WCProductImageFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$WCProductImageToJson(WCProductImage instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'dateCreated': instance.dateCreated?.toIso8601String(),
-      'dateCreatedGMT': instance.dateCreatedGMT?.toIso8601String(),
-      'dateModified': instance.dateModified?.toIso8601String(),
-      'dateModifiedGMT': instance.dateModifiedGMT?.toIso8601String(),
+      'date_created': instance.dateCreated?.toIso8601String(),
+      'date_created_g_m_t': instance.dateCreatedGMT?.toIso8601String(),
+      'date_modified': instance.dateModified?.toIso8601String(),
+      'date_modified_g_m_t': instance.dateModifiedGMT?.toIso8601String(),
       'src': instance.src,
       'name': instance.name,
       'alt': instance.alt,

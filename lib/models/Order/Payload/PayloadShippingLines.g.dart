@@ -8,8 +8,8 @@ part of 'PayloadShippingLines.dart';
 
 PayloadShippingLines _$PayloadShippingLinesFromJson(Map<String, dynamic> json) {
   return PayloadShippingLines(
-    json['methodId'] as String,
-    json['methodTitle'] as String,
+    json['method_id'] as String,
+    json['method_title'] as String,
     json['total'] as String,
   );
 }
@@ -17,7 +17,7 @@ PayloadShippingLines _$PayloadShippingLinesFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PayloadShippingLinesToJson(
         PayloadShippingLines instance) =>
     <String, dynamic>{
-      'methodId': instance.methodId,
-      'methodTitle': instance.methodTitle,
+      'method_id': instance.methodId,
+      'method_title': instance.methodTitle,
       'total': instance.total,
     };

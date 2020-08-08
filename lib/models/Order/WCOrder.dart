@@ -13,7 +13,7 @@ import 'WCOrderMetaData.dart';
 
 part 'WCOrder.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCOrder {
   final int id;
   final int parentId;

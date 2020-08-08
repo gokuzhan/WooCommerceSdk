@@ -14,7 +14,7 @@ WCShippingZoneMethodType _$WCShippingZoneMethodTypeFromJson(
     json['description'] as String,
     json['type'] as String,
     json['value'] as String,
-    json['typeDefault'] as String,
+    json['type_default'] as String,
     json['tip'] as String,
     json['placeholder'] as String,
     json['options'] == null
@@ -32,7 +32,7 @@ Map<String, dynamic> _$WCShippingZoneMethodTypeToJson(
       'description': instance.description,
       'type': instance.type,
       'value': instance.value,
-      'typeDefault': instance.typeDefault,
+      'type_default': instance.typeDefault,
       'tip': instance.tip,
       'placeholder': instance.placeholder,
       'options': instance.options,

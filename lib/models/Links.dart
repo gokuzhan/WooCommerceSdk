@@ -5,7 +5,7 @@ import 'Self.dart';
 
 part 'Links.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class Links {
   final List<Self> self;
   final List<Collection> collection;

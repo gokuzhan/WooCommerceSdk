@@ -4,7 +4,7 @@ import 'WCShippingZoneMethodOptions.dart';
 
 part 'WCShippingZoneMethodTaxStatus.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCShippingZoneMethodTaxStatus {
   final String id;
   final String label;

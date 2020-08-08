@@ -9,17 +9,17 @@ part of 'WCShippingMethodMethods.dart';
 WCShippingMethodMethods _$WCShippingMethodMethodsFromJson(
     Map<String, dynamic> json) {
   return WCShippingMethodMethods(
-    (json['freeShipping'] as List)
+    (json['free_shipping'] as List)
         ?.map((e) => e == null
             ? null
             : WCShippingMethodFreeShipping.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-    (json['flatRate'] as List)
+    (json['flat_rate'] as List)
         ?.map((e) => e == null
             ? null
             : WCShippingMethodFlatRate.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-    (json['localPickup'] as List)
+    (json['local_pickup'] as List)
         ?.map((e) => e == null
             ? null
             : WCShippingMethodLocalPickup.fromJson(e as Map<String, dynamic>))
@@ -30,7 +30,7 @@ WCShippingMethodMethods _$WCShippingMethodMethodsFromJson(
 Map<String, dynamic> _$WCShippingMethodMethodsToJson(
         WCShippingMethodMethods instance) =>
     <String, dynamic>{
-      'freeShipping': instance.freeShipping,
-      'flatRate': instance.flatRate,
-      'localPickup': instance.localPickup,
+      'free_shipping': instance.freeShipping,
+      'flat_rate': instance.flatRate,
+      'local_pickup': instance.localPickup,
     };

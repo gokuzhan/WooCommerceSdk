@@ -6,7 +6,7 @@ import 'WCShippingMethodLocalPickup.dart';
 
 part 'WCShippingMethodMethods.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCShippingMethodMethods {
   final List<WCShippingMethodFreeShipping> freeShipping;
   final List<WCShippingMethodFlatRate> flatRate;

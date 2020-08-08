@@ -3,7 +3,7 @@ import 'package:woocommerce_sdk/models/MetaData.dart';
 
 part 'TaxLines.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class TaxLines {
   final int id;
   final String rateCode;

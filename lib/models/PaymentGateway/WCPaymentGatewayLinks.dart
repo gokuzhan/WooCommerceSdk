@@ -5,7 +5,7 @@ import 'WCPaymentGatewaySelf.dart';
 
 part 'WCPaymentGatewayLinks.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCPaymentGatewayLinks {
   final List<WCPaymentGatewaySelf> self;
   final List<WCPaymentGatewayCollection> collection;

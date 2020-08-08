@@ -20,7 +20,7 @@ WCCartItem _$WCCartItemFromJson(Map<String, dynamic> json) {
             : WCCartItemImages.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     json['price'] as String,
-    json['linePrice'] as String,
+    json['line_price'] as String,
     (json['variation'] as List)?.map((e) => e as String)?.toList(),
   );
 }
@@ -35,6 +35,6 @@ Map<String, dynamic> _$WCCartItemToJson(WCCartItem instance) =>
       'permalink': instance.permalink,
       'images': instance.images,
       'price': instance.price,
-      'linePrice': instance.linePrice,
+      'line_price': instance.linePrice,
       'variation': instance.variation,
     };

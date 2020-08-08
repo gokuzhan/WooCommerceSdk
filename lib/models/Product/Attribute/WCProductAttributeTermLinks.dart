@@ -5,7 +5,7 @@ import 'WCProductAttributeTermSelf.dart';
 
 part 'WCProductAttributeTermLinks.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCProductAttributeTermLinks {
   final List<WCProductAttributeTermSelf> self;
   final List<WCProductAttributeTermCollection> collection;

@@ -14,7 +14,7 @@ WCShippingZoneMethodClassCost91 _$WCShippingZoneMethodClassCost91FromJson(
     json['description'] as String,
     json['type'] as String,
     json['value'] as String,
-    json['classCost91Default'] as String,
+    json['class_cost91_default'] as String,
     json['tip'] as String,
     json['placeholder'] as String,
   );
@@ -28,7 +28,7 @@ Map<String, dynamic> _$WCShippingZoneMethodClassCost91ToJson(
       'description': instance.description,
       'type': instance.type,
       'value': instance.value,
-      'classCost91Default': instance.classCost91Default,
+      'class_cost91_default': instance.classCost91Default,
       'tip': instance.tip,
       'placeholder': instance.placeholder,
     };

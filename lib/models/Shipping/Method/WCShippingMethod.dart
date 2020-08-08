@@ -5,7 +5,7 @@ import 'WCShippingMethodMethods.dart';
 
 part 'WCShippingMethod.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCShippingMethod {
   final int parentId;
   final String name;

@@ -4,7 +4,7 @@ import 'WCShippingZoneLinks.dart';
 
 part 'WCShippingZone.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCShippingZone {
   final int id;
   final String name;

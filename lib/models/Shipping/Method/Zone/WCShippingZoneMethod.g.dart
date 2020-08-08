@@ -8,13 +8,13 @@ part of 'WCShippingZoneMethod.dart';
 
 WCShippingZoneMethod _$WCShippingZoneMethodFromJson(Map<String, dynamic> json) {
   return WCShippingZoneMethod(
-    json['instanceId'] as int,
+    json['instance_id'] as int,
     json['title'] as String,
     json['order'] as int,
     json['enabled'] as bool,
-    json['methodId'] as String,
-    json['methodTitle'] as String,
-    json['methodDescription'] as String,
+    json['method_id'] as String,
+    json['method_title'] as String,
+    json['method_description'] as String,
     json['settings'] == null
         ? null
         : WCShippingZoneMethodSettings.fromJson(
@@ -29,13 +29,13 @@ WCShippingZoneMethod _$WCShippingZoneMethodFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$WCShippingZoneMethodToJson(
         WCShippingZoneMethod instance) =>
     <String, dynamic>{
-      'instanceId': instance.instanceId,
+      'instance_id': instance.instanceId,
       'title': instance.title,
       'order': instance.order,
       'enabled': instance.enabled,
-      'methodId': instance.methodId,
-      'methodTitle': instance.methodTitle,
-      'methodDescription': instance.methodDescription,
+      'method_id': instance.methodId,
+      'method_title': instance.methodTitle,
+      'method_description': instance.methodDescription,
       'settings': instance.settings,
       'links': instance.links,
     };

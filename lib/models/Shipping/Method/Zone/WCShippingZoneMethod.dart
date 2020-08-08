@@ -5,7 +5,7 @@ import 'WCShippingZoneMethodSettings.dart';
 
 part 'WCShippingZoneMethod.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCShippingZoneMethod {
   final int instanceId;
   final String title;

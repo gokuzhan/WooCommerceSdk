@@ -13,17 +13,17 @@ WCPaymentGateway _$WCPaymentGatewayFromJson(Map<String, dynamic> json) {
     json['description'] as String,
     json['order'] as int,
     json['enabled'] as bool,
-    json['methodTitle'] as String,
-    json['methodDescription'] as String,
-    (json['methodSupports'] as List)?.map((e) => e as String)?.toList(),
+    json['method_title'] as String,
+    json['method_description'] as String,
+    (json['method_supports'] as List)?.map((e) => e as String)?.toList(),
     json['settings'] == null
         ? null
         : WCPaymentGatewaySettings.fromJson(
             json['settings'] as Map<String, dynamic>),
-    json['lLinks'] == null
+    json['l_links'] == null
         ? null
         : WCPaymentGatewayLinks.fromJson(
-            json['lLinks'] as Map<String, dynamic>),
+            json['l_links'] as Map<String, dynamic>),
   );
 }
 
@@ -34,9 +34,9 @@ Map<String, dynamic> _$WCPaymentGatewayToJson(WCPaymentGateway instance) =>
       'description': instance.description,
       'order': instance.order,
       'enabled': instance.enabled,
-      'methodTitle': instance.methodTitle,
-      'methodDescription': instance.methodDescription,
-      'methodSupports': instance.methodSupports,
+      'method_title': instance.methodTitle,
+      'method_description': instance.methodDescription,
+      'method_supports': instance.methodSupports,
       'settings': instance.settings,
-      'lLinks': instance.lLinks,
+      'l_links': instance.lLinks,
     };

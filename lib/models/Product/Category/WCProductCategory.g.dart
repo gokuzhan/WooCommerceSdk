@@ -18,7 +18,7 @@ WCProductCategory _$WCProductCategoryFromJson(Map<String, dynamic> json) {
         ? null
         : WCProductCategoryImage.fromJson(
             json['image'] as Map<String, dynamic>),
-    json['menuOrder'] as int,
+    json['menu_order'] as int,
     json['count'] as int,
     json['links'] == null
         ? null
@@ -36,7 +36,7 @@ Map<String, dynamic> _$WCProductCategoryToJson(WCProductCategory instance) =>
       'description': instance.description,
       'display': instance.display,
       'image': instance.image,
-      'menuOrder': instance.menuOrder,
+      'menu_order': instance.menuOrder,
       'count': instance.count,
       'links': instance.links,
     };

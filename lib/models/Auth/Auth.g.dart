@@ -14,8 +14,7 @@ Auth _$AuthFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$AuthToJson(Auth instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$AuthToJson(Auth instance) => <String, dynamic>{
       'access_token': instance.access_token,
       'refresh_token': instance.refresh_token,
       'expires_in': instance.expires_in,

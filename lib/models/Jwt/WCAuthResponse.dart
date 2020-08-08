@@ -1,8 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'WCJwtResponse.g.dart';
+part 'WCAuthResponse.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCAuthResponse {
   final Map<String, dynamic> wp_user;
   final String access_token;
@@ -13,7 +13,7 @@ class WCAuthResponse {
       this.wp_user, this.access_token, this.refresh_token, this.expires_in);
 
   factory WCAuthResponse.fromJson(Map<String, dynamic> json) =>
-      _$WCJwtResponseFromJson(json);
+      _$WCAuthResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => _$WCJwtResponseToJson(this);
+  Map<String, dynamic> toJson() => _$WCAuthResponseToJson(this);
 }

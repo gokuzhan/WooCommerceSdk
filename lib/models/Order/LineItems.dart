@@ -5,7 +5,7 @@ import 'Taxes.dart';
 
 part 'LineItems.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class LineItems {
   final int id;
   final String name;

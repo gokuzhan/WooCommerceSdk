@@ -9,13 +9,13 @@ part of 'WCCustomer.dart';
 WCCustomer _$WCCustomerFromJson(Map<String, dynamic> json) {
   return WCCustomer(
     json['id'] as int,
-    json['dateCreated'] as String,
-    json['dateCreatedGmt'] as String,
-    json['dateModified'] as String,
-    json['dateModifiedGmt'] as String,
+    json['date_created'] as String,
+    json['date_created_gmt'] as String,
+    json['date_modified'] as String,
+    json['date_modified_gmt'] as String,
     json['email'] as String,
-    json['firstName'] as String,
-    json['lastName'] as String,
+    json['first_name'] as String,
+    json['last_name'] as String,
     json['role'] as String,
     json['username'] as String,
     json['password'] as String,
@@ -25,9 +25,9 @@ WCCustomer _$WCCustomerFromJson(Map<String, dynamic> json) {
     json['shipping'] == null
         ? null
         : Shipping.fromJson(json['shipping'] as Map<String, dynamic>),
-    json['isPayingCustomer'] as bool,
-    json['avatarUrl'] as String,
-    (json['metaData'] as List)
+    json['is_paying_customer'] as bool,
+    json['avatar_url'] as String,
+    (json['meta_data'] as List)
         ?.map((e) => e == null
             ? null
             : WCCustomerMetaData.fromJson(e as Map<String, dynamic>))
@@ -41,20 +41,20 @@ WCCustomer _$WCCustomerFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$WCCustomerToJson(WCCustomer instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'dateCreated': instance.dateCreated,
-      'dateCreatedGmt': instance.dateCreatedGmt,
-      'dateModified': instance.dateModified,
-      'dateModifiedGmt': instance.dateModifiedGmt,
+      'date_created': instance.dateCreated,
+      'date_created_gmt': instance.dateCreatedGmt,
+      'date_modified': instance.dateModified,
+      'date_modified_gmt': instance.dateModifiedGmt,
       'email': instance.email,
-      'firstName': instance.firstName,
-      'lastName': instance.lastName,
+      'first_name': instance.firstName,
+      'last_name': instance.lastName,
       'role': instance.role,
       'username': instance.username,
       'password': instance.password,
       'billing': instance.billing,
       'shipping': instance.shipping,
-      'isPayingCustomer': instance.isPayingCustomer,
-      'avatarUrl': instance.avatarUrl,
-      'metaData': instance.metaData,
+      'is_paying_customer': instance.isPayingCustomer,
+      'avatar_url': instance.avatarUrl,
+      'meta_data': instance.metaData,
       'links': instance.links,
     };

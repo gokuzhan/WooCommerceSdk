@@ -4,7 +4,7 @@ import 'WCProductReviewLinks.dart';
 
 part 'WCProductReview.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCProductReview {
   final int id;
   final String dateCreated;

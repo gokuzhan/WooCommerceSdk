@@ -4,7 +4,7 @@ import 'WCCartItemImages.dart';
 
 part 'WCCartItem.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCCartItem {
   final String key;
   final int id;

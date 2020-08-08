@@ -4,7 +4,7 @@ import 'WCTaxClassLinks.dart';
 
 part 'WCTaxClass.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCTaxClass {
   final String slug;
   final String name;

@@ -10,19 +10,19 @@ LineItems _$LineItemsFromJson(Map<String, dynamic> json) {
   return LineItems(
     json['id'] as int,
     json['name'] as String,
-    json['productId'] as int,
-    json['variationId'] as int,
+    json['product_id'] as int,
+    json['variation_id'] as int,
     json['quantity'] as int,
-    json['taxClass'] as String,
+    json['tax_class'] as String,
     json['subtotal'] as String,
-    json['subtotalTax'] as String,
+    json['subtotal_tax'] as String,
     json['total'] as String,
-    json['totalTax'] as String,
+    json['total_tax'] as String,
     (json['taxes'] as List)
         ?.map(
             (e) => e == null ? null : Taxes.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-    (json['metaData'] as List)
+    (json['meta_data'] as List)
         ?.map((e) =>
             e == null ? null : MetaData.fromJson(e as Map<String, dynamic>))
         ?.toList(),
@@ -34,16 +34,16 @@ LineItems _$LineItemsFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$LineItemsToJson(LineItems instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'productId': instance.productId,
-      'variationId': instance.variationId,
+      'product_id': instance.productId,
+      'variation_id': instance.variationId,
       'quantity': instance.quantity,
-      'taxClass': instance.taxClass,
+      'tax_class': instance.taxClass,
       'subtotal': instance.subtotal,
-      'subtotalTax': instance.subtotalTax,
+      'subtotal_tax': instance.subtotalTax,
       'total': instance.total,
-      'totalTax': instance.totalTax,
+      'total_tax': instance.totalTax,
       'taxes': instance.taxes,
-      'metaData': instance.metaData,
+      'meta_data': instance.metaData,
       'sku': instance.sku,
       'price': instance.price,
     };

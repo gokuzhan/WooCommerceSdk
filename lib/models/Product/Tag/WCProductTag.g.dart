@@ -13,9 +13,9 @@ WCProductTag _$WCProductTagFromJson(Map<String, dynamic> json) {
     json['slug'] as String,
     json['description'] as String,
     json['count'] as int,
-    json['lLinks'] == null
+    json['l_links'] == null
         ? null
-        : WCProductTagLinks.fromJson(json['lLinks'] as Map<String, dynamic>),
+        : WCProductTagLinks.fromJson(json['l_links'] as Map<String, dynamic>),
   );
 }
 
@@ -26,5 +26,5 @@ Map<String, dynamic> _$WCProductTagToJson(WCProductTag instance) =>
       'slug': instance.slug,
       'description': instance.description,
       'count': instance.count,
-      'lLinks': instance.lLinks,
+      'l_links': instance.lLinks,
     };

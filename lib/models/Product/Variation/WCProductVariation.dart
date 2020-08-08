@@ -8,7 +8,7 @@ import 'WCProductVariationMetaData.dart';
 
 part 'WCProductVariation.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCProductVariation {
   final int id;
   final DateTime dateCreated;

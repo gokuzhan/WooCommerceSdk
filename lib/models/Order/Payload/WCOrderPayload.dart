@@ -10,7 +10,7 @@ import 'WCOrderPayloadShipping.dart';
 
 part 'WCOrderPayload.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCOrderPayload {
   final String paymentMethod;
   final String paymentMethodTitle;

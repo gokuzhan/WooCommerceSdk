@@ -13,30 +13,30 @@ WCShippingZoneMethodSettings _$WCShippingZoneMethodSettingsFromJson(
         ? null
         : WCShippingZoneMethodTitle.fromJson(
             json['title'] as Map<String, dynamic>),
-    json['taxStatus'] == null
+    json['tax_status'] == null
         ? null
         : WCShippingZoneMethodTaxStatus.fromJson(
-            json['taxStatus'] as Map<String, dynamic>),
+            json['tax_status'] as Map<String, dynamic>),
     json['cost'] == null
         ? null
         : WCShippingZoneMethodCost.fromJson(
             json['cost'] as Map<String, dynamic>),
-    json['classCosts'] == null
+    json['class_costs'] == null
         ? null
         : WCShippingZoneMethodClassCosts.fromJson(
-            json['classCosts'] as Map<String, dynamic>),
-    json['classCost92'] == null
+            json['class_costs'] as Map<String, dynamic>),
+    json['class_cost92'] == null
         ? null
         : WCShippingZoneMethodClassCost92.fromJson(
-            json['classCost92'] as Map<String, dynamic>),
-    json['classCost91'] == null
+            json['class_cost92'] as Map<String, dynamic>),
+    json['class_cost91'] == null
         ? null
         : WCShippingZoneMethodClassCost91.fromJson(
-            json['classCost91'] as Map<String, dynamic>),
-    json['noClassCost'] == null
+            json['class_cost91'] as Map<String, dynamic>),
+    json['no_class_cost'] == null
         ? null
         : WCShippingZoneMethodNoClassCost.fromJson(
-            json['noClassCost'] as Map<String, dynamic>),
+            json['no_class_cost'] as Map<String, dynamic>),
     json['type'] == null
         ? null
         : WCShippingZoneMethodType.fromJson(
@@ -48,11 +48,11 @@ Map<String, dynamic> _$WCShippingZoneMethodSettingsToJson(
         WCShippingZoneMethodSettings instance) =>
     <String, dynamic>{
       'title': instance.title,
-      'taxStatus': instance.taxStatus,
+      'tax_status': instance.taxStatus,
       'cost': instance.cost,
-      'classCosts': instance.classCosts,
-      'classCost92': instance.classCost92,
-      'classCost91': instance.classCost91,
-      'noClassCost': instance.noClassCost,
+      'class_costs': instance.classCosts,
+      'class_cost92': instance.classCost92,
+      'class_cost91': instance.classCost91,
+      'no_class_cost': instance.noClassCost,
       'type': instance.type,
     };

@@ -5,7 +5,7 @@ import 'WCProductCategorySelf.dart';
 
 part 'WCProductCategoryLinks.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCProductCategoryLinks {
   final List<WCProductCategorySelf> self;
   final List<WCProductCategoryCollection> collection;

@@ -3,7 +3,7 @@ import 'package:woocommerce_sdk/models/Cart/WCCartItem.dart';
 
 part 'WCCart.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCCart {
   final String currency;
   final int itemCount;

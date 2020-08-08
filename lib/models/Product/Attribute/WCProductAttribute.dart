@@ -4,7 +4,7 @@ import 'WCProductAttributeTermLinks.dart';
 
 part 'WCProductAttribute.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCProductAttribute {
   final int id;
   final String name;

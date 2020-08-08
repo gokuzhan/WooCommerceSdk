@@ -8,7 +8,7 @@ part of 'WCShippingMethod.dart';
 
 WCShippingMethod _$WCShippingMethodFromJson(Map<String, dynamic> json) {
   return WCShippingMethod(
-    json['parentId'] as int,
+    json['parent_id'] as int,
     json['name'] as String,
     (json['locations'] as List)
         ?.map((e) => e == null
@@ -24,7 +24,7 @@ WCShippingMethod _$WCShippingMethodFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$WCShippingMethodToJson(WCShippingMethod instance) =>
     <String, dynamic>{
-      'parentId': instance.parentId,
+      'parent_id': instance.parentId,
       'name': instance.name,
       'locations': instance.locations,
       'methods': instance.methods,

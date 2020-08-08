@@ -4,7 +4,7 @@ import 'WCCouponLinks.dart';
 
 part 'WCCoupon.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCCoupon {
   final int id;
   final String code;

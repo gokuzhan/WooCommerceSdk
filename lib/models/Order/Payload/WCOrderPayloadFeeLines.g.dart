@@ -10,10 +10,10 @@ WCOrderPayloadFeeLines _$WCOrderPayloadFeeLinesFromJson(
     Map<String, dynamic> json) {
   return WCOrderPayloadFeeLines(
     json['name'] as String,
-    json['taxClass'] as String,
-    json['taxStatus'] as String,
+    json['tax_class'] as String,
+    json['tax_status'] as String,
     json['total'] as String,
-    (json['metaData'] as List)
+    (json['meta_data'] as List)
         ?.map((e) => e == null
             ? null
             : WCOrderPayloadMetaData.fromJson(e as Map<String, dynamic>))
@@ -25,8 +25,8 @@ Map<String, dynamic> _$WCOrderPayloadFeeLinesToJson(
         WCOrderPayloadFeeLines instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'taxClass': instance.taxClass,
-      'taxStatus': instance.taxStatus,
+      'tax_class': instance.taxClass,
+      'tax_status': instance.taxStatus,
       'total': instance.total,
-      'metaData': instance.metaData,
+      'meta_data': instance.metaData,
     };

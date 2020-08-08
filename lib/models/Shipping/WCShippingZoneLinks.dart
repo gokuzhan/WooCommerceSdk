@@ -6,7 +6,7 @@ import 'WCShippingZoneSelf.dart';
 
 part 'WCShippingZoneLinks.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCShippingZoneLinks {
   final List<WCShippingZoneSelf> self;
   final List<WCShippingZoneCollection> collection;

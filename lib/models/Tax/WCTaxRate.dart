@@ -4,7 +4,7 @@ import 'WCTaxRateLinks.dart';
 
 part 'WCTaxRate.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCTaxRate {
   final int id;
   final String country;

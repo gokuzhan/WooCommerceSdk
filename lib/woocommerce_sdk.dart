@@ -18,7 +18,7 @@ import 'models/Coupon/WCCoupon.dart';
 import 'models/Customer/Download/WCCustomerDownload.dart';
 import 'models/Customer/WCCustomer.dart';
 import 'models/Error/WCError.dart';
-import 'models/Jwt/WCJwtResponse.dart';
+import 'models/Jwt/WCAuthResponse.dart';
 import 'models/Order/Payload/WCOrderPayload.dart';
 import 'models/Order/WCOrder.dart';
 import 'models/PaymentGateway/WCPaymentGateway.dart';
@@ -46,7 +46,7 @@ export 'models/Customer/Download/WCCustomerDownload.dart'
     show WCCustomerDownload;
 export 'models/Customer/WCCustomer.dart' show WCCustomer;
 export 'models/Error/WCError.dart' show WCError;
-export 'models/Jwt/WCJwtResponse.dart' show WCAuthResponse;
+export 'models/Jwt/WCAuthResponse.dart' show WCAuthResponse;
 export 'models/Order/Payload/WCOrderPayload.dart' show WCOrderPayload;
 export 'models/Order/WCOrder.dart' show WCOrder;
 export 'models/PaymentGateway/WCPaymentGateway.dart' show WCPaymentGateway;
@@ -1726,7 +1726,6 @@ class WooCommerceSdk {
     headers.putIfAbsent('Accept', () => 'application/json charset=utf-8');
     // 'Authorization': _bearerToken,
     try {
-      print({"response": "response test"});
       final http.Response response = await http.get(url);
       if (response.statusCode == 200) {
         return json.decode(response.body);

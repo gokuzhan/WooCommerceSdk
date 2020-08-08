@@ -11,7 +11,7 @@ WCShippingMethodFreeShipping _$WCShippingMethodFreeShippingFromJson(
   return WCShippingMethodFreeShipping(
     json['id'] as int,
     json['title'] as String,
-    json['methodId'] as String,
+    json['method_id'] as String,
     json['cost'] as String,
   );
 }
@@ -21,6 +21,6 @@ Map<String, dynamic> _$WCShippingMethodFreeShippingToJson(
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
-      'methodId': instance.methodId,
+      'method_id': instance.methodId,
       'cost': instance.cost,
     };

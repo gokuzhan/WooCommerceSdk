@@ -9,16 +9,16 @@ part of 'WCProductReview.dart';
 WCProductReview _$WCProductReviewFromJson(Map<String, dynamic> json) {
   return WCProductReview(
     json['id'] as int,
-    json['dateCreated'] as String,
-    json['dateCreatedGmt'] as String,
-    json['productId'] as int,
+    json['date_created'] as String,
+    json['date_created_gmt'] as String,
+    json['product_id'] as int,
     json['status'] as String,
     json['reviewer'] as String,
-    json['reviewerEmail'] as String,
+    json['reviewer_email'] as String,
     json['review'] as String,
     json['rating'] as int,
     json['verified'] as bool,
-    json['reviewerAvatarUrls'] as Map<String, dynamic>,
+    json['reviewer_avatar_urls'] as Map<String, dynamic>,
     json['links'] == null
         ? null
         : WCProductReviewLinks.fromJson(json['links'] as Map<String, dynamic>),
@@ -28,15 +28,15 @@ WCProductReview _$WCProductReviewFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$WCProductReviewToJson(WCProductReview instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'dateCreated': instance.dateCreated,
-      'dateCreatedGmt': instance.dateCreatedGmt,
-      'productId': instance.productId,
+      'date_created': instance.dateCreated,
+      'date_created_gmt': instance.dateCreatedGmt,
+      'product_id': instance.productId,
       'status': instance.status,
       'reviewer': instance.reviewer,
-      'reviewerEmail': instance.reviewerEmail,
+      'reviewer_email': instance.reviewerEmail,
       'review': instance.review,
       'rating': instance.rating,
       'verified': instance.verified,
-      'reviewerAvatarUrls': instance.reviewerAvatarUrls,
+      'reviewer_avatar_urls': instance.reviewerAvatarUrls,
       'links': instance.links,
     };

@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'PayloadShippingLines.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class PayloadShippingLines {
   final String methodId;
   final String methodTitle;

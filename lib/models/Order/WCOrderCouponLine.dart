@@ -3,7 +3,7 @@ import 'package:woocommerce_sdk/models/MetaData.dart';
 
 part 'WCOrderCouponLine.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(fieldRename: FieldRename.snake)
 class WCOrderCouponLine {
   final int id;
   final String code;

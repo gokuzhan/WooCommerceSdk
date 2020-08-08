@@ -9,15 +9,15 @@ part of 'ShippingLines.dart';
 ShippingLines _$ShippingLinesFromJson(Map<String, dynamic> json) {
   return ShippingLines(
     json['id'] as int,
-    json['methodTitle'] as String,
-    json['methodId'] as String,
+    json['method_title'] as String,
+    json['method_id'] as String,
     json['total'] as String,
-    json['totalTax'] as String,
+    json['total_tax'] as String,
     (json['taxes'] as List)
         ?.map(
             (e) => e == null ? null : Taxes.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-    (json['metaData'] as List)
+    (json['meta_data'] as List)
         ?.map((e) =>
             e == null ? null : MetaData.fromJson(e as Map<String, dynamic>))
         ?.toList(),
@@ -27,10 +27,10 @@ ShippingLines _$ShippingLinesFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$ShippingLinesToJson(ShippingLines instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'methodTitle': instance.methodTitle,
-      'methodId': instance.methodId,
+      'method_title': instance.methodTitle,
+      'method_id': instance.methodId,
       'total': instance.total,
-      'totalTax': instance.totalTax,
+      'total_tax': instance.totalTax,
       'taxes': instance.taxes,
-      'metaData': instance.metaData,
+      'meta_data': instance.metaData,
     };
