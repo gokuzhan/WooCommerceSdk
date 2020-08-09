@@ -9,7 +9,7 @@ class WCCart {
   final int itemCount;
   final List<WCCartItem> items;
   final bool needsShipping;
-  final String totalPrice;
+  final dynamic totalPrice;
   final int totalWeight;
 
   WCCart(this.currency, this.itemCount, this.items, this.needsShipping,
