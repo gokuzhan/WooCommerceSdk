@@ -4,7 +4,7 @@ part 'WCCartItemImages.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class WCCartItemImages {
-  final String id;
+  final int id;
   final String src;
   final String thumbnail;
   final bool srcset;
