@@ -249,6 +249,7 @@ class WooCommerceSdk {
   /// Log User out
   ///
   logUserOut() async {
+    this.setAuth = null;
     await _localDbService.deleteSecurityToken();
   }
 
