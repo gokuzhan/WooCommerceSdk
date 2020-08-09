@@ -6,7 +6,7 @@ part 'WCCustomerMetaData.g.dart';
 class WCCustomerMetaData {
   final int id;
   final String key;
-  final String value;
+  final dynamic value;
 
   WCCustomerMetaData(this.id, this.key, this.value);
 

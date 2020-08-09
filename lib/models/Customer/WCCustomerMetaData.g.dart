@@ -10,7 +10,7 @@ WCCustomerMetaData _$WCCustomerMetaDataFromJson(Map<String, dynamic> json) {
   return WCCustomerMetaData(
     json['id'] as int,
     json['key'] as String,
-    json['value'] as String,
+    json['value'] as dynamic,
   );
 }
 

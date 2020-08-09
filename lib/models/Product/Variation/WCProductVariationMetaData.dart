@@ -6,7 +6,7 @@ part 'WCProductVariationMetaData.g.dart';
 class WCProductVariationMetaData {
   final int id;
   final String key;
-  final String value;
+  final dynamic value;
 
   WCProductVariationMetaData(this.id, this.key, this.value);
 

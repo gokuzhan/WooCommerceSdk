@@ -6,7 +6,7 @@ part 'WCOrderMetaData.g.dart';
 class WCOrderMetaData {
   final int id;
   final String key;
-  final String value;
+  final dynamic value;
 
   WCOrderMetaData(this.id, this.key, this.value);
 

@@ -11,7 +11,7 @@ WCOrderPayloadMetaData _$WCOrderPayloadMetaDataFromJson(
   return WCOrderPayloadMetaData(
     json['id'] as int,
     json['key'] as String,
-    json['value'] as String,
+    json['value'] as dynamic,
   );
 }
 

@@ -6,7 +6,7 @@ part 'WCOrderPayloadMetaData.g.dart';
 class WCOrderPayloadMetaData {
   final int id;
   final String key;
-  final String value;
+  final dynamic value;
 
   WCOrderPayloadMetaData(this.id, this.key, this.value);
 

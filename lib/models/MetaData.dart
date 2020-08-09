@@ -6,7 +6,7 @@ part 'MetaData.g.dart';
 class MetaData {
   final int id;
   final String key;
-  final String value;
+  final dynamic value;
 
   MetaData(this.id, this.key, this.value);
 
