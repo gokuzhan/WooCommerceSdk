@@ -1014,7 +1014,7 @@ class WooCommerceSdk {
       if (response.statusCode >= 200 && response.statusCode < 300) {
         final jsonStr = json.decode(response.body);
         List<WCCartItem> cartItems = [];
-        _printDebug('response gotten : ' + response.toString());
+        _printDebug('response gotten : ' + response.body.toString());
         for (var p in jsonStr) {
           var prod = WCCartItem.fromJson(p);
           _printDebug('prod gotten here : ' + prod.name.toString());
@@ -1042,7 +1042,7 @@ class WooCommerceSdk {
       WCCart cart;
       final response = await http
           .get(this.baseUrl + URL_STORE_API_PATH + 'cart', headers: _urlHeader);
-      _printDebug('response gotten : ' + response.toString());
+      _printDebug('response gotten : ' + response.body.toString());
       if (response.statusCode >= 200 && response.statusCode < 300) {
         final jsonStr = json.decode(response.body);
         cart = WCCart.fromJson(jsonStr);
@@ -1121,7 +1121,7 @@ class WooCommerceSdk {
       final response = await http.get(
           this.baseUrl + URL_STORE_API_PATH + 'cart/items/' + key,
           headers: _urlHeader);
-      _printDebug('response gotten : ' + response.toString());
+      _printDebug('response gotten : ' + response.body.toString());
       if (response.statusCode >= 200 && response.statusCode < 300) {
         final jsonStr = json.decode(response.body);
         cartItem = WCCartItem.fromJson(jsonStr);
