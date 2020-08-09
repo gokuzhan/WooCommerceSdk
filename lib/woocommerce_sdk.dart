@@ -123,6 +123,7 @@ class WooCommerceSdk {
   Auth _authInstance;
 
   Auth get authInstance => _authInstance;
+
   set setAuth(Auth auth) => {_authInstance = auth};
 
   Uri queryUri;
@@ -132,8 +133,8 @@ class WooCommerceSdk {
   // Header to be sent for JWT authourization
   Map<String, String> _urlHeader = {'Authorization': ''};
 
-  String get urlHeader =>
-      _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
+  String get urlHeader => _urlHeader['Authorization'] =
+      'Bearer ' + (authInstance != null ? authInstance.access_token : '');
   LocalDatabaseService _localDbService = new LocalDatabaseService();
 
   /// Associated endpoint : yourwebsite.com/wp-json/api-bearer-auth/v1/auth
@@ -181,7 +182,7 @@ class WooCommerceSdk {
     // customer logged
     if (await isCustomerLoggedIn()) {
       // if auth is null
-      if (!(authInstance != null)) {
+      if (authInstance == null) {
         // preparing auth refreshing payload
         final body = {'token': await _localDbService.getSecurityRefresh()};
         // making request for refreshing auth
@@ -973,24 +974,28 @@ class WooCommerceSdk {
     };
     if (variations != null) data['variations'] = variations;
     await getAuthInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
-    final response = await http.post(
-      this.baseUrl + URL_STORE_API_PATH + 'cart/items',
-      headers: {
-        'Content-Type': 'application/json',
-        ..._urlHeader,
-      },
-      body: json.encode(data),
-    );
+    if (authInstance != null) {
+      _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
+      final response = await http.post(
+        this.baseUrl + URL_STORE_API_PATH + 'cart/items',
+        headers: {
+          'Content-Type': 'application/json',
+          ..._urlHeader,
+        },
+        body: json.encode(data),
+      );
 
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      final jsonStr = json.decode(response.body);
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        final jsonStr = json.decode(response.body);
 
-      _printDebug('added to my cart : ' + jsonStr.toString());
-      return WCCartItem.fromJson(jsonStr);
+        _printDebug('added to my cart : ' + jsonStr.toString());
+        return WCCartItem.fromJson(jsonStr);
+      } else {
+        WCError err = WCError.fromJson(json.decode(response.body));
+        throw err;
+      }
     } else {
-      WCError err = WCError.fromJson(json.decode(response.body));
-      throw err;
+      return null;
     }
   }
 
@@ -1000,27 +1005,31 @@ class WooCommerceSdk {
 
   Future<List<WCCartItem>> getMyCartItems() async {
     await getAuthInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
-    final response = await http.get(
-        this.baseUrl + URL_STORE_API_PATH + 'cart/items',
-        headers: _urlHeader);
+    if (authInstance != null) {
+      _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
+      final response = await http.get(
+          this.baseUrl + URL_STORE_API_PATH + 'cart/items',
+          headers: _urlHeader);
 
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      final jsonStr = json.decode(response.body);
-      List<WCCartItem> cartItems = [];
-      _printDebug('response gotten : ' + response.toString());
-      for (var p in jsonStr) {
-        var prod = WCCartItem.fromJson(p);
-        _printDebug('prod gotten here : ' + prod.name.toString());
-        cartItems.add(prod);
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        final jsonStr = json.decode(response.body);
+        List<WCCartItem> cartItems = [];
+        _printDebug('response gotten : ' + response.toString());
+        for (var p in jsonStr) {
+          var prod = WCCartItem.fromJson(p);
+          _printDebug('prod gotten here : ' + prod.name.toString());
+          cartItems.add(prod);
+        }
+
+        _printDebug('account user fetch : ' + jsonStr.toString());
+        return cartItems;
+      } else {
+        _printDebug(' error : ' + response.body);
+        WCError err = WCError.fromJson(json.decode(response.body));
+        throw err;
       }
-
-      _printDebug('account user fetch : ' + jsonStr.toString());
-      return cartItems;
     } else {
-      _printDebug(' error : ' + response.body);
-      WCError err = WCError.fromJson(json.decode(response.body));
-      throw err;
+      return null;
     }
   }
 
@@ -1028,65 +1037,77 @@ class WooCommerceSdk {
 
   Future<WCCart> getMyCart() async {
     await getAuthInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
-    WCCart cart;
-    final response = await http.get(this.baseUrl + URL_STORE_API_PATH + 'cart',
-        headers: _urlHeader);
-    _printDebug('response gotten : ' + response.toString());
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      final jsonStr = json.decode(response.body);
-      cart = WCCart.fromJson(jsonStr);
-      return cart;
+    if (authInstance != null) {
+      _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
+      WCCart cart;
+      final response = await http
+          .get(this.baseUrl + URL_STORE_API_PATH + 'cart', headers: _urlHeader);
+      _printDebug('response gotten : ' + response.toString());
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        final jsonStr = json.decode(response.body);
+        cart = WCCart.fromJson(jsonStr);
+        return cart;
+      } else {
+        _printDebug(' error : ' + response.body);
+        WCError err = WCError.fromJson(json.decode(response.body));
+        throw err;
+      }
     } else {
-      _printDebug(' error : ' + response.body);
-      WCError err = WCError.fromJson(json.decode(response.body));
-      throw err;
+      return null;
     }
   }
 
   Future deleteMyCartItem({@required String key}) async {
-    Map<String, dynamic> data = {
-      'key': key,
-    };
-    _printDebug('Deleting CartItem With Payload : ' + data.toString());
     await getAuthInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
+    if (authInstance != null) {
+      Map<String, dynamic> data = {
+        'key': key,
+      };
+      _printDebug('Deleting CartItem With Payload : ' + data.toString());
+      _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
 
-    final http.Response response = await http.delete(
-      this.baseUrl + URL_STORE_API_PATH + 'cart/items/' + key,
-      headers: _urlHeader,
-    );
-    _printDebug('response of delete cart  : ' + response.body.toString());
+      final http.Response response = await http.delete(
+        this.baseUrl + URL_STORE_API_PATH + 'cart/items/' + key,
+        headers: _urlHeader,
+      );
+      _printDebug('response of delete cart  : ' + response.body.toString());
 
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      _printDebug(
-          'response of delete cart oooo   : ' + response.body.toString());
-      //final jsonStr = json.decode(response.body);
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        _printDebug(
+            'response of delete cart oooo   : ' + response.body.toString());
+        //final jsonStr = json.decode(response.body);
 
-      //_printToLog('added to my cart : '+jsonStr.toString());
-      //return WCCartItem.fromJson(jsonStr);
-      return response.body;
+        //_printToLog('added to my cart : '+jsonStr.toString());
+        //return WCCartItem.fromJson(jsonStr);
+        return response.body;
+      } else {
+        WCError err = WCError.fromJson(json.decode(response.body));
+        throw err;
+      }
     } else {
-      WCError err = WCError.fromJson(json.decode(response.body));
-      throw err;
+      return null;
     }
   }
 
   Future deleteAllMyCartItems() async {
     await getAuthInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
+    if (authInstance != null) {
+      _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
 
-    final http.Response response = await http.delete(
-      this.baseUrl + URL_STORE_API_PATH + 'cart/items/',
-      headers: _urlHeader,
-    );
-    _printDebug('response of delete cart  : ' + response.body.toString());
+      final http.Response response = await http.delete(
+        this.baseUrl + URL_STORE_API_PATH + 'cart/items/',
+        headers: _urlHeader,
+      );
+      _printDebug('response of delete cart  : ' + response.body.toString());
 
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      return response.body;
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return response.body;
+      } else {
+        WCError err = WCError.fromJson(json.decode(response.body));
+        throw err;
+      }
     } else {
-      WCError err = WCError.fromJson(json.decode(response.body));
-      throw err;
+      return null;
     }
   }
 
@@ -1094,20 +1115,24 @@ class WooCommerceSdk {
 
   Future<WCCartItem> getMyCartItemByKey(String key) async {
     await getAuthInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
-    WCCartItem cartItem;
-    final response = await http.get(
-        this.baseUrl + URL_STORE_API_PATH + 'cart/items/' + key,
-        headers: _urlHeader);
-    _printDebug('response gotten : ' + response.toString());
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      final jsonStr = json.decode(response.body);
-      cartItem = WCCartItem.fromJson(jsonStr);
-      return cartItem;
+    if (authInstance != null) {
+      _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
+      WCCartItem cartItem;
+      final response = await http.get(
+          this.baseUrl + URL_STORE_API_PATH + 'cart/items/' + key,
+          headers: _urlHeader);
+      _printDebug('response gotten : ' + response.toString());
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        final jsonStr = json.decode(response.body);
+        cartItem = WCCartItem.fromJson(jsonStr);
+        return cartItem;
+      } else {
+        _printDebug('error : ' + response.body);
+        WCError err = WCError.fromJson(json.decode(response.body));
+        throw err;
+      }
     } else {
-      _printDebug('error : ' + response.body);
-      WCError err = WCError.fromJson(json.decode(response.body));
-      throw err;
+      return null;
     }
   }
 
@@ -1123,20 +1148,24 @@ class WooCommerceSdk {
     };
     if (variations != null) data['variations'] = variations;
     await getAuthInstance();
-    _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
-    final response = await http.put(
-        this.baseUrl + URL_STORE_API_PATH + 'cart/items/' + key,
-        headers: _urlHeader,
-        body: data);
+    if (authInstance != null) {
+      _urlHeader['Authorization'] = 'Bearer ' + authInstance.access_token;
+      final response = await http.put(
+          this.baseUrl + URL_STORE_API_PATH + 'cart/items/' + key,
+          headers: _urlHeader,
+          body: data);
 
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      final jsonStr = json.decode(response.body);
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        final jsonStr = json.decode(response.body);
 
-      _printDebug('added to my cart : ' + jsonStr.toString());
-      return WCCartItem.fromJson(jsonStr);
+        _printDebug('added to my cart : ' + jsonStr.toString());
+        return WCCartItem.fromJson(jsonStr);
+      } else {
+        WCError err = WCError.fromJson(json.decode(response.body));
+        throw err;
+      }
     } else {
-      WCError err = WCError.fromJson(json.decode(response.body));
-      throw err;
+      return null;
     }
   }
 
@@ -1144,12 +1173,17 @@ class WooCommerceSdk {
   ///
   /// Related endpoint: https://woocommerce.github.io/woocommerce-rest-api-docs/#orders.
   Future<WCOrder> createOrder(WCOrderPayload orderPayload) async {
-    _printDebug('Creating Order With Payload : ' + orderPayload.toString());
-    _setApiResourceUrl(
-      path: 'orders',
-    );
-    final response = await post(queryUri.toString(), orderPayload.toJson());
-    return WCOrder.fromJson(response);
+    await getAuthInstance();
+    if (authInstance != null) {
+      _printDebug('Creating Order With Payload : ' + orderPayload.toString());
+      _setApiResourceUrl(
+        path: 'orders',
+      );
+      final response = await post(queryUri.toString(), orderPayload.toJson());
+      return WCOrder.fromJson(response);
+    } else {
+      return null;
+    }
   }
 
   /// Returns a list of all [Order], with filter options.
@@ -1195,27 +1229,36 @@ class WooCommerceSdk {
     }).forEach((k, v) {
       if (v != null) payload[k] = v.toString();
     });
-    List<WCOrder> orders = [];
-    _printDebug('Getting Order With Payload : ' + payload.toString());
-    _setApiResourceUrl(path: 'orders', queryParameters: payload);
-    final response = await get(queryUri.toString());
-    for (var o in response) {
-      var order = WCOrder.fromJson(o);
-      _printDebug('order gotten here : ' + order.toString());
-      orders.add(order);
+    await getAuthInstance();
+    if (authInstance != null) {
+      List<WCOrder> orders = [];
+      _printDebug('Getting Order With Payload : ' + payload.toString());
+      _setApiResourceUrl(path: 'orders', queryParameters: payload);
+      final response = await get(queryUri.toString());
+      for (var o in response) {
+        var order = WCOrder.fromJson(o);
+        _printDebug('order gotten here : ' + order.toString());
+        orders.add(order);
+      }
+      return orders;
+    } else {
+      return null;
     }
-    return orders;
   }
 
   /// Returns a [WCOrder] object that matches the provided [id].
 
   Future<WCOrder> getOrderById(int id, {String dp}) async {
-    Map<String, dynamic> payload = {};
-    if (dp != null) payload["dp"] = dp;
-    _setApiResourceUrl(
-        path: 'orders/' + id.toString(), queryParameters: payload);
-    final response = await get(queryUri.toString());
-    return WCOrder.fromJson(response);
+    if (authInstance != null) {
+      Map<String, dynamic> payload = {};
+      if (dp != null) payload["dp"] = dp;
+      _setApiResourceUrl(
+          path: 'orders/' + id.toString(), queryParameters: payload);
+      final response = await get(queryUri.toString());
+      return WCOrder.fromJson(response);
+    } else {
+      return null;
+    }
   }
 
   /// Updates an existing order and returns the [WCOrder] object.
@@ -1223,12 +1266,16 @@ class WooCommerceSdk {
   /// Related endpoint: https://woocommerce.github.io/woocommerce-rest-api-docs/#orders.
 
   Future<WCOrder> updateOrder(WCOrder order) async {
-    _printDebug('Updating Order With Payload : ' + order.toString());
-    _setApiResourceUrl(
-      path: 'orders/' + order.id.toString(),
-    );
-    final response = await put(queryUri.toString(), order.toJson());
-    return WCOrder.fromJson(response);
+    if (authInstance != null) {
+      _printDebug('Updating Order With Payload : ' + order.toString());
+      _setApiResourceUrl(
+        path: 'orders/' + order.id.toString(),
+      );
+      final response = await put(queryUri.toString(), order.toJson());
+      return WCOrder.fromJson(response);
+    } else {
+      return null;
+    }
   }
 
   /// Deletes an existing order and returns the [WCOrder] object.
@@ -1239,12 +1286,16 @@ class WooCommerceSdk {
     Map data = {
       'force': true,
     };
-    _printDebug('Deleting Order With Id : ' + orderId.toString());
-    _setApiResourceUrl(
-      path: 'orders/' + orderId.toString(),
-    );
-    final response = await delete(queryUri.toString(), data);
-    return WCOrder.fromJson(response);
+    if (authInstance != null) {
+      _printDebug('Deleting Order With Id : ' + orderId.toString());
+      _setApiResourceUrl(
+        path: 'orders/' + orderId.toString(),
+      );
+      final response = await delete(queryUri.toString(), data);
+      return WCOrder.fromJson(response);
+    } else {
+      return null;
+    }
   }
 
   /// Creates an coupon and returns the [WCCoupon] object.
@@ -1258,26 +1309,30 @@ class WooCommerceSdk {
     bool excludeSaleItems,
     String minimumAmount,
   }) async {
-    Map<String, dynamic> payload = {};
+    if (authInstance != null) {
+      Map<String, dynamic> payload = {};
 
-    ({
-      'code': code,
-      'discount_type': discountType,
-      'amount': amount,
-      'individual_use': individualUse,
-      'exclude_sale_items': excludeSaleItems,
-      'minimum_amount': minimumAmount,
-    }).forEach((k, v) {
-      if (v != null) payload[k] = v.toString();
-    });
-    WCCoupon coupon;
-    _setApiResourceUrl(
-      path: 'coupons',
-    );
-    final response = await post(queryUri.toString(), payload);
-    _printDebug('response gotten : ' + response.toString());
-    coupon = WCCoupon.fromJson(response);
-    return coupon;
+      ({
+        'code': code,
+        'discount_type': discountType,
+        'amount': amount,
+        'individual_use': individualUse,
+        'exclude_sale_items': excludeSaleItems,
+        'minimum_amount': minimumAmount,
+      }).forEach((k, v) {
+        if (v != null) payload[k] = v.toString();
+      });
+      WCCoupon coupon;
+      _setApiResourceUrl(
+        path: 'coupons',
+      );
+      final response = await post(queryUri.toString(), payload);
+      _printDebug('response gotten : ' + response.toString());
+      coupon = WCCoupon.fromJson(response);
+      return coupon;
+    } else {
+      return null;
+    }
   }
 
   /// Returns a list of all [WCCoupon], with filter options.
@@ -1296,33 +1351,41 @@ class WooCommerceSdk {
     String orderBy,
     String code,
   }) async {
-    Map<String, dynamic> payload = {};
-    ({
-      'page': page, 'per_page': perPage, 'search': search,
-      'after': after, 'before': before,
-      //'exclude': exclude, 'include': include,
-      'offset': offset,
-      'order': order, 'orderby': orderBy, 'code': code,
-    }).forEach((k, v) {
-      if (v != null) payload[k] = v.toString();
-    });
-    List<WCCoupon> coupons;
-    _printDebug('Getting Coupons With Payload : ' + payload.toString());
-    _setApiResourceUrl(path: 'coupons', queryParameters: payload);
-    final response = await get(queryUri.toString());
-    for (var c in response) {
-      var coupon = WCCoupon.fromJson(c);
-      _printDebug('prod gotten here : ' + order.toString());
-      coupons.add(coupon);
+    if (authInstance != null) {
+      Map<String, dynamic> payload = {};
+      ({
+        'page': page, 'per_page': perPage, 'search': search,
+        'after': after, 'before': before,
+        //'exclude': exclude, 'include': include,
+        'offset': offset,
+        'order': order, 'orderby': orderBy, 'code': code,
+      }).forEach((k, v) {
+        if (v != null) payload[k] = v.toString();
+      });
+      List<WCCoupon> coupons;
+      _printDebug('Getting Coupons With Payload : ' + payload.toString());
+      _setApiResourceUrl(path: 'coupons', queryParameters: payload);
+      final response = await get(queryUri.toString());
+      for (var c in response) {
+        var coupon = WCCoupon.fromJson(c);
+        _printDebug('prod gotten here : ' + order.toString());
+        coupons.add(coupon);
+      }
+      return coupons;
+    } else {
+      return null;
     }
-    return coupons;
   }
 
   /// Returns a [WCCoupon] object with the specified [id].
   Future<WCCoupon> getCouponById(int id) async {
-    _setApiResourceUrl(path: 'coupons/' + id.toString());
-    final response = await get(queryUri.toString());
-    return WCCoupon.fromJson(response);
+    if (authInstance != null) {
+      _setApiResourceUrl(path: 'coupons/' + id.toString());
+      final response = await get(queryUri.toString());
+      return WCCoupon.fromJson(response);
+    } else {
+      return null;
+    }
   }
 
   /// Returns a list of all [WCTaxRate], with filter options.
