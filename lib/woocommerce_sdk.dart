@@ -130,7 +130,7 @@ class WooCommerceSdk {
 
   String get apiResourceUrl => queryUri.toString();
 
-  // Header to be sent for JWT authourization
+  // Header to be sent for JWT authorization
   Map<String, String> _urlHeader = {'Authorization': ''};
 
   String get urlHeader => _urlHeader['Authorization'] =
@@ -1161,7 +1161,7 @@ class WooCommerceSdk {
       if (response.statusCode >= 200 && response.statusCode < 300) {
         final jsonStr = json.decode(response.body);
 
-        _printDebug('added to my cart : ' + jsonStr.toString());
+        _printDebug('update to my cart : ' + jsonStr.toString());
         return WCCartItem.fromJson(jsonStr);
       } else {
         WCError err = WCError.fromJson(json.decode(response.body));
