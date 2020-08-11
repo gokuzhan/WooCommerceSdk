@@ -194,6 +194,7 @@ class WooCommerceSdk {
         if (response.statusCode >= 200 && response.statusCode < 300) {
           this.setAuth = Auth.fromJson(json.decode(response.body));
         } else {
+          logUserOut();
           // bad status
           throw new WCError.fromJson(json.decode(response.body));
         }
