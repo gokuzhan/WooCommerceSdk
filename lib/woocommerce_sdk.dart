@@ -184,6 +184,8 @@ class WooCommerceSdk {
       // if auth is null
       if (authInstance == null) {
         // preparing auth refreshing payload
+        final String refreshToken = await _localDbService.getSecurityRefresh();
+        _printDebug('refresh token : ' + refreshToken);
         final body = {'token': await _localDbService.getSecurityRefresh()};
         // making request for refreshing auth
         final response = await http.post(this.baseUrl + URL_AUTH_TOKEN_REFRESH,
