@@ -1788,12 +1788,16 @@ class WooCommerceSdk {
     String url = this._getOAuthURL("GET", endPoint);
     String _token = await _localDbService.getSecurityAccess();
     String _bearerToken = "Bearer $_token";
-    _printDebug('this is the bearer token : ' + _bearerToken);
     Map<String, String> headers = new HashMap();
     headers.putIfAbsent('Accept', () => 'application/json charset=utf-8');
-    // 'Authorization': _bearerToken,
+    headers.putIfAbsent('Authorization', () => _bearerToken);
     try {
-      final http.Response response = await http.get(url);
+      final http.Response response = await http.get(url, headers: headers);
+      _printDebug(
+          '${response.request.method.toString()} request -> ${response.request.url.toString()}');
+      _printDebug('request headers:${response.request.headers.toString()}}');
+      _printDebug(
+          'response status:${response.statusCode.toString()} data:${response.body.toString()}');
       if (response.statusCode == 200) {
         return json.decode(response.body);
       }
@@ -1809,12 +1813,16 @@ class WooCommerceSdk {
     http.Client client = http.Client();
     http.Request request = http.Request('GET', Uri.parse(url));
     request.headers[HttpHeaders.contentTypeHeader] =
-        'application/json; charset=utf-8';
+    'application/json; charset=utf-8';
     //request.headers[HttpHeaders.authorizationHeader] = _token;
     request.headers[HttpHeaders.cacheControlHeader] = "no-cache";
     String response =
-        await client.send(request).then((res) => res.stream.bytesToString());
+    await client.send(request).then((res) => res.stream.bytesToString());
     var dataResponse = await json.decode(response);
+    _printDebug(
+        '${request.method.toString()} request -> ${request.url.toString()}');
+    _printDebug('request headers:${request.headers.toString()}}');
+    _printDebug('response ${response.toString()}');
     _handleError(dataResponse);
     return dataResponse;
   }
@@ -1830,13 +1838,17 @@ class WooCommerceSdk {
     http.Client client = http.Client();
     http.Request request = http.Request('POST', Uri.parse(url));
     request.headers[HttpHeaders.contentTypeHeader] =
-        'application/json; charset=utf-8';
+    'application/json; charset=utf-8';
     //request.headers[HttpHeaders.authorizationHeader] = _bearerToken;
     request.headers[HttpHeaders.cacheControlHeader] = "no-cache";
     request.body = json.encode(data);
     String response =
-        await client.send(request).then((res) => res.stream.bytesToString());
+    await client.send(request).then((res) => res.stream.bytesToString());
     var dataResponse = await json.decode(response);
+    _printDebug(
+        '${request.method.toString()} request -> ${request.url.toString()}');
+    _printDebug('request headers:${request.headers.toString()}}');
+    _printDebug('response ${response.toString()}');
     _handleError(dataResponse);
     return dataResponse;
   }
@@ -1849,12 +1861,16 @@ class WooCommerceSdk {
     http.Client client = http.Client();
     http.Request request = http.Request('PUT', Uri.parse(url));
     request.headers[HttpHeaders.contentTypeHeader] =
-        'application/json; charset=utf-8';
+    'application/json; charset=utf-8';
     request.headers[HttpHeaders.cacheControlHeader] = "no-cache";
     request.body = json.encode(data);
     String response =
-        await client.send(request).then((res) => res.stream.bytesToString());
+    await client.send(request).then((res) => res.stream.bytesToString());
     var dataResponse = await json.decode(response);
+    _printDebug(
+        '${request.method.toString()} request -> ${request.url.toString()}');
+    _printDebug('request headers:${request.headers.toString()}}');
+    _printDebug('response ${response.toString()}');
     _handleError(dataResponse);
     return dataResponse;
   }
@@ -1867,14 +1883,17 @@ class WooCommerceSdk {
     http.Client client = http.Client();
     http.Request request = http.Request('DELETE', Uri.parse(url));
     request.headers[HttpHeaders.contentTypeHeader] =
-        'application/json; charset=utf-8';
+    'application/json; charset=utf-8';
     //request.headers[HttpHeaders.authorizationHeader] = _urlHeader['Authorization'];
     request.headers[HttpHeaders.cacheControlHeader] = "no-cache";
     request.body = json.encode(data);
     final response =
-        await client.send(request).then((res) => res.stream.bytesToString());
-    _printDebug("this is the delete's response : " + response.toString());
+    await client.send(request).then((res) => res.stream.bytesToString());
     var dataResponse = await json.decode(response);
+    _printDebug(
+        '${request.method.toString()} request -> ${request.url.toString()}');
+    _printDebug('request headers:${request.headers.toString()}}');
+    _printDebug('response ${response.toString()}');
     _handleHttpError(dataResponse);
     return dataResponse;
   }
@@ -1898,7 +1917,10 @@ class WooCommerceSdk {
       return Future.error(
           "error: status code ${response.statusCode} ${response.reasonPhrase}");
     final deleteResponse = await response.stream.bytesToString();
-    _printDebug("delete response : " + deleteResponse.toString());
+    _printDebug(
+        '${request.method.toString()} request -> ${request.url.toString()}');
+    _printDebug('request headers:${request.headers.toString()}}');
+    _printDebug('response ${response.toString()}');
     return deleteResponse;
   }
 }
