@@ -1795,7 +1795,7 @@ class WooCommerceSdk {
       final http.Response response = await http.get(url, headers: headers);
       _printDebug(
           '${response.request.method.toString()} request -> ${response.request.url.toString()}');
-      _printDebug('request headers:${response.request.headers.toString()}}');
+      _printDebug('request headers:${response.request.headers.toString()}');
       _printDebug(
           'response status:${response.statusCode.toString()} data:${response.body.toString()}');
       if (response.statusCode == 200) {
