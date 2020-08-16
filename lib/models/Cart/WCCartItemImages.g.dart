@@ -11,7 +11,7 @@ WCCartItemImages _$WCCartItemImagesFromJson(Map<String, dynamic> json) {
     json['id'] as dynamic,
     json['src'] as String,
     json['thumbnail'] as String,
-    json['srcset'] as bool,
+    json['srcset'] as String,
     json['sizes'] as String,
     json['name'] as String,
     json['alt'] as String,
