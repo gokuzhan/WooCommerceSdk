@@ -7,7 +7,7 @@ class WCCartItemImages {
   final dynamic id;
   final String src;
   final String thumbnail;
-  final bool srcset;
+  final String srcset;
   final String sizes;
   final String name;
   final String alt;
