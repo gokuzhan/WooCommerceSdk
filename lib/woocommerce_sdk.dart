@@ -10,7 +10,6 @@ import 'package:crypto/crypto.dart' as crypto;
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:woocommerce_sdk/models/Auth/Auth.dart';
-import 'package:woocommerce_sdk/utils/console.dart';
 
 import 'constants/constants.dart';
 import 'helpers/Query.dart';
@@ -150,7 +149,7 @@ class WooCommerceSdk {
 
     final response = await http.post(this.baseUrl + URL_AUTH_TOKEN,
         body: json.encode(body), headers: {'Content-Type': 'application/json'});
-    _printDebug(ConsoleLog().httpGet(response.request.url.toString()));
+
     if (response.statusCode >= 200 && response.statusCode < 300) {
       WCAuthResponse authResponse =
           WCAuthResponse.fromJson(json.decode(response.body));
@@ -195,7 +194,6 @@ class WooCommerceSdk {
         final response = await http.post(this.baseUrl + URL_AUTH_TOKEN_REFRESH,
             body: json.encode(body),
             headers: {'Content-Type': 'application/json'});
-        _printDebug(ConsoleLog().httpGet(response.request.url.toString()));
         if (response.statusCode >= 200 && response.statusCode < 300) {
           this.setAuth = Auth.fromJson(json.decode(response.body));
         } else {
@@ -213,11 +211,10 @@ class WooCommerceSdk {
         final response = await http.post(this.baseUrl + URL_AUTH_TOKEN_REFRESH,
             body: json.encode(body),
             headers: {'Content-Type': 'application/json'});
-        _printDebug(ConsoleLog().httpGet(response.request.url.toString()));
         // status should be success
         if (response.statusCode >= 200 && response.statusCode < 300) {
           WCAuthResponse authResponse =
-          WCAuthResponse.fromJson(json.decode(response.body));
+              WCAuthResponse.fromJson(json.decode(response.body));
           this.setAuth = Auth.fromJson(authResponse.toJson());
           // updating the security access `access_token`
           _localDbService.updateSecurityAccess(authInstance.access_token);
@@ -1050,7 +1047,7 @@ class WooCommerceSdk {
       WCCart cart;
       final response = await http
           .get(this.baseUrl + URL_STORE_API_PATH + 'cart', headers: _urlHeader);
-      _printDebug(ConsoleLog().httpGet(response.request.url.toString()));
+
       if (response.statusCode >= 200 && response.statusCode < 300) {
         final jsonStr = json.decode(response.body);
         cart = WCCart.fromJson(jsonStr);
@@ -1078,7 +1075,6 @@ class WooCommerceSdk {
         this.baseUrl + URL_STORE_API_PATH + 'cart/items/' + key,
         headers: _urlHeader,
       );
-      _printDebug(ConsoleLog().httpGet(response.request.url.toString()));
       _printDebug('response of delete cart  : ' + response.body.toString());
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
@@ -1107,7 +1103,7 @@ class WooCommerceSdk {
         this.baseUrl + URL_STORE_API_PATH + 'cart/items/',
         headers: _urlHeader,
       );
-      _printDebug(ConsoleLog().httpGet(response.request.url.toString()));
+
       _printDebug('response of delete cart  : ' + response.body.toString());
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
@@ -1131,7 +1127,7 @@ class WooCommerceSdk {
       final response = await http.get(
           this.baseUrl + URL_STORE_API_PATH + 'cart/items/' + key,
           headers: _urlHeader);
-      _printDebug(ConsoleLog().httpGet(response.request.url.toString()));
+
       _printDebug('response gotten : ' + response.body.toString());
       if (response.statusCode >= 200 && response.statusCode < 300) {
         final jsonStr = json.decode(response.body);
@@ -1165,7 +1161,7 @@ class WooCommerceSdk {
           this.baseUrl + URL_STORE_API_PATH + 'cart/items/' + key,
           headers: _urlHeader,
           body: data);
-      _printDebug(ConsoleLog().httpPut(response.request.url.toString()));
+
       if (response.statusCode >= 200 && response.statusCode < 300) {
         final jsonStr = json.decode(response.body);
 
@@ -1853,7 +1849,7 @@ class WooCommerceSdk {
     String response =
     await client.send(request).then((res) => res.stream.bytesToString());
     var dataResponse = await json.decode(response);
-    _printDebug(ConsoleLog().httpPost(request.url.toString()));
+
     _printDebug('request headers:${request.headers.toString()}}');
     _printDebug('response ${response.toString()}');
     _handleError(dataResponse);
@@ -1874,7 +1870,7 @@ class WooCommerceSdk {
     String response =
     await client.send(request).then((res) => res.stream.bytesToString());
     var dataResponse = await json.decode(response);
-    _printDebug(ConsoleLog().httpPut(request.url.toString()));
+
     _printDebug('request headers:${request.headers.toString()}}');
     _printDebug('response ${response.toString()}');
     _handleError(dataResponse);
@@ -1896,7 +1892,7 @@ class WooCommerceSdk {
     final response =
     await client.send(request).then((res) => res.stream.bytesToString());
     var dataResponse = await json.decode(response);
-    _printDebug(ConsoleLog().httpDelete(request.url.toString()));
+
     _printDebug('request headers:${request.headers.toString()}}');
     _printDebug('response ${response.toString()}');
     _handleHttpError(dataResponse);
@@ -1916,7 +1912,7 @@ class WooCommerceSdk {
     request.headers.addAll(<String, String>{
       "Accept": "application/json",
     });
-    _printDebug(ConsoleLog().httpDelete(request.url.toString()));
+
     request.body = jsonEncode(data);
     final response = await request.send();
     if (response.statusCode > 300)
