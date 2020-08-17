@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
-import 'package:ansicolor/ansicolor.dart';
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -94,8 +93,6 @@ class WooCommerceSdk {
   /// Parameter(Optional) [isDebug], tells the library if it should _printToLog debug logs.
   /// Useful if you are debuging or in development.
   bool isDebug;
-
-  AnsiPen _consolePen = new AnsiPen();
 
   WooCommerceSdk({
     @required String baseUrl,
