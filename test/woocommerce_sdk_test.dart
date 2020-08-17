@@ -24,7 +24,8 @@ textDel(String endpoint) async {
 textPost(String endpoint, body) async {
   try {
     http.Response res = await http.post(endpoint, body: body);
-    print(ConsoleLog().httpPost(res.request.url.toString()));
+    print("WooCommerceSdk Log : " +
+        ConsoleLog().httpPost(res.request.url.toString()));
     num count = 0;
     res.bodyBytes.forEach((bytes) {
       count = count + bytes;
@@ -44,9 +45,6 @@ void main() {
 //    print(ConsoleLog().httpDelete('/user/action/like'));
 //    print(ConsoleLog().httpDelete('/user/action/like/:id/suppress/:parent'));
 
-    await textGet('https://reqres.in/api/users');
-    await textGet('https://reqres.in/api/users/2');
-    await textGet('https://reqres.in/api/users/23');
     await textPost(
         'https://reqres.in/api/users', {"name": "morpheus", "job": "leader"});
     await textDel('https://reqres.in/api/users/2');

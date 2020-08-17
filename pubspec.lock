@@ -16,7 +16,7 @@ packages:
     source: hosted
     version: "0.39.17"
   ansicolor:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: ansicolor
       url: "https://pub.dartlang.org"
