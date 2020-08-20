@@ -16,7 +16,7 @@ class Auth {
 
   Auth(this.token, this.id, this.email, this.nicename, this.firstName,
       this.lastName, this.displayName) {
-    _jwtInstance = new WCJwtDecoder();
+    _jwtInstance = new WCJwtDecoder(token: this.token);
   }
 
   Future<Map<String, dynamic>> get decoded async => await _jwtInstance.decode();
