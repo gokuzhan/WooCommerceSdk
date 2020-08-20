@@ -9,7 +9,7 @@ part of 'Auth.dart';
 Auth _$AuthFromJson(Map<String, dynamic> json) {
   return Auth(
     json['token'] as String,
-    json['id'] as String,
+    json['id'] as int,
     json['email'] as String,
     json['nicename'] as String,
     json['first_name'] as String,

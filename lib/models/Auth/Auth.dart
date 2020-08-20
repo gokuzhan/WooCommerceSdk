@@ -7,7 +7,7 @@ part 'Auth.g.dart';
 class Auth {
   static WCJwtDecoder _jwtInstance;
   final String token;
-  final String id;
+  final int id;
   final String email;
   final String nicename;
   final String firstName;
