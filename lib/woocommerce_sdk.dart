@@ -190,7 +190,7 @@ class WooCommerceSdk {
         headers.putIfAbsent('Authorization', () => _bearerToken);
         _printDebug('old security token : $_token');
         final response =
-        await http.get(URL_AUTH_TOKEN_REFRESH, headers: headers);
+            await http.get(URL_AUTH_TOKEN_REFRESH, headers: headers);
         if (response.statusCode >= 200 && response.statusCode < 300) {
           this.setAuth = Auth.fromJson(json.decode(response.body));
           _printDebug('new security token : ' + authInstance.token);
@@ -239,7 +239,7 @@ class WooCommerceSdk {
       _setApiResourceUrl(
         path: 'customers/' + id.toString(),
       );
-      final response = await get(queryUri.toString());
+      final response = await get(endPoint: queryUri.toString());
       customer = WCCustomer.fromJson(response);
       return customer;
     } else {
@@ -299,7 +299,7 @@ class WooCommerceSdk {
     List<WCCustomer> customers = [];
     _setApiResourceUrl(path: 'customers', queryParameters: payload);
 
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString());
     _printDebug('response gotten : ' + response.toString());
     for (var c in response) {
       var customer = WCCustomer.fromJson(c);
@@ -315,7 +315,7 @@ class WooCommerceSdk {
     _setApiResourceUrl(
       path: 'customers/' + id.toString(),
     );
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString());
     print({"response": response});
     customer = WCCustomer.fromJson(response);
     return customer;
@@ -330,7 +330,7 @@ class WooCommerceSdk {
     _setApiResourceUrl(
         path: 'customers/' + customerId.toString() + '/downloads');
 
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString());
     _printDebug('getting customer downloads : ' + response.toString());
     for (var d in response) {
       var download = WCCustomerDownload.fromJson(d);
@@ -450,7 +450,7 @@ class WooCommerceSdk {
     _printDebug("Parameters: " + payload.toString());
     List<WCProduct> products = [];
     _setApiResourceUrl(path: 'products', queryParameters: payload);
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString(), auth: false);
     _printDebug('response gotten : ' + response.toString());
     _printDebug('this is the queri uri : ' + queryUri.toString());
     for (var p in response) {
@@ -467,7 +467,7 @@ class WooCommerceSdk {
     _setApiResourceUrl(
       path: 'products/' + id.toString(),
     );
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString(), auth: false);
     product = WCProduct.fromJson(response);
     return product;
   }
@@ -528,7 +528,7 @@ class WooCommerceSdk {
         path: 'products/' + productId.toString() + '/variations',
         queryParameters: payload);
     _printDebug('this is the curent path : ' + this.apiPath);
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString(), auth: false);
     for (var v in response) {
       var prodv = WCProductVariation.fromJson(v);
       _printDebug('prod gotten here : ' + prodv.toString());
@@ -548,7 +548,7 @@ class WooCommerceSdk {
           '/variations/' +
           variationId.toString(),
     );
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString(), auth: false);
     _printDebug('response gotten : ' + response.toString());
 
     productVariation = WCProductVariation.fromJson(response);
@@ -564,7 +564,7 @@ class WooCommerceSdk {
     _setApiResourceUrl(
       path: 'products/attributes',
     );
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString(), auth: false);
     for (var a in response) {
       var att = WCProductAttribute.fromJson(a);
       _printDebug('prod gotten here : ' + att.toString());
@@ -581,7 +581,7 @@ class WooCommerceSdk {
     _setApiResourceUrl(
       path: 'products/attributes/' + attributeId.toString(),
     );
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString(), auth: false);
     _printDebug('response gotten : ' + response.toString());
 
     productAttribute = WCProductAttribute.fromJson(response);
@@ -625,7 +625,7 @@ class WooCommerceSdk {
     _setApiResourceUrl(
         path: 'products/attributes/' + attributeId.toString() + '/terms',
         queryParameters: payload);
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString(), auth: false);
     for (var t in response) {
       var term = WCProductAttributeTerm.fromJson(t);
       _printDebug('term gotten here : ' + term.toString());
@@ -645,7 +645,7 @@ class WooCommerceSdk {
           '/terms/' +
           termId.toString(),
     );
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString(), auth: false);
     _printDebug('response gotten : ' + response.toString());
 
     productAttributeTerm = WCProductAttributeTerm.fromJson(response);
@@ -684,7 +684,7 @@ class WooCommerceSdk {
     _printDebug('payload : ' + payload.toString());
     _setApiResourceUrl(path: 'products/categories', queryParameters: payload);
     _printDebug('this is the path : ' + this.apiPath);
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString(), auth: false);
     for (var c in response) {
       var cat = WCProductCategory.fromJson(c);
       _printDebug('category gotten here : ' + cat.toString());
@@ -701,7 +701,7 @@ class WooCommerceSdk {
     _setApiResourceUrl(
       path: 'products/categories/' + categoryId.toString(),
     );
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString(), auth: false);
     _printDebug('response gotten : ' + response.toString());
     productCategory = WCProductCategory.fromJson(response);
     return productCategory;
@@ -742,7 +742,7 @@ class WooCommerceSdk {
     _setApiResourceUrl(
       path: 'products/shipping_classes',
     );
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString(), auth: false);
     _printDebug('response gotten : ' + response.toString());
     for (var c in response) {
       var sClass = WCProductShippingClass.fromJson(c);
@@ -760,7 +760,7 @@ class WooCommerceSdk {
     _setApiResourceUrl(
       path: 'products/shipping_classes/' + id.toString(),
     );
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString(), auth: false);
     _printDebug('response gotten : ' + response.toString());
     productShippingClass = WCProductShippingClass.fromJson(response);
     return productShippingClass;
@@ -794,7 +794,7 @@ class WooCommerceSdk {
     List<WCProductTag> productTags = [];
     _printDebug('making request with payload : ' + payload.toString());
     _setApiResourceUrl(path: 'products/tags', queryParameters: payload);
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString(), auth: false);
     _printDebug('response gotten : ' + response.toString());
     for (var c in response) {
       var tag = WCProductTag.fromJson(c);
@@ -811,7 +811,7 @@ class WooCommerceSdk {
     _setApiResourceUrl(
       path: 'products/tags/' + id.toString(),
     );
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString(), auth: false);
     _printDebug('response gotten : ' + response.toString());
     productTag = WCProductTag.fromJson(response);
     return productTag;
@@ -889,7 +889,7 @@ class WooCommerceSdk {
     String meQueryPath = 'products/reviews' + getQueryString(payload);
     List<WCProductReview> productReviews = [];
     //_setApiResourceUrl(path: 'products/reviews', queryParameters: payload);
-    final response = await get(meQueryPath);
+    final response = await get(endPoint: meQueryPath, auth: false);
     _printDebug('response gotten : ' + response.toString());
     for (var r in response) {
       var rev = WCProductReview.fromJson(r);
@@ -908,7 +908,7 @@ class WooCommerceSdk {
     _setApiResourceUrl(
       path: 'products/reviews/' + reviewId.toString(),
     );
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString(), auth: false);
     _printDebug('response gotten : ' + response.toString());
     productReview = WCProductReview.fromJson(response);
     return productReview;
@@ -1236,7 +1236,7 @@ class WooCommerceSdk {
       List<WCOrder> orders = [];
       _printDebug('Getting Order With Payload : ' + payload.toString());
       _setApiResourceUrl(path: 'orders', queryParameters: payload);
-      final response = await get(queryUri.toString());
+      final response = await get(endPoint: queryUri.toString());
       for (var o in response) {
         var order = WCOrder.fromJson(o);
         _printDebug('order gotten here : ' + order.toString());
@@ -1256,7 +1256,7 @@ class WooCommerceSdk {
       if (dp != null) payload["dp"] = dp;
       _setApiResourceUrl(
           path: 'orders/' + id.toString(), queryParameters: payload);
-      final response = await get(queryUri.toString());
+      final response = await get(endPoint: queryUri.toString());
       return WCOrder.fromJson(response);
     } else {
       return null;
@@ -1367,7 +1367,7 @@ class WooCommerceSdk {
       List<WCCoupon> coupons;
       _printDebug('Getting Coupons With Payload : ' + payload.toString());
       _setApiResourceUrl(path: 'coupons', queryParameters: payload);
-      final response = await get(queryUri.toString());
+      final response = await get(endPoint: queryUri.toString());
       for (var c in response) {
         var coupon = WCCoupon.fromJson(c);
         _printDebug('prod gotten here : ' + order.toString());
@@ -1383,7 +1383,7 @@ class WooCommerceSdk {
   Future<WCCoupon> getCouponById(int id) async {
     if (authInstance != null) {
       _setApiResourceUrl(path: 'coupons/' + id.toString());
-      final response = await get(queryUri.toString());
+      final response = await get(endPoint: queryUri.toString());
       return WCCoupon.fromJson(response);
     } else {
       return null;
@@ -1415,7 +1415,7 @@ class WooCommerceSdk {
     List<WCTaxRate> taxRates = [];
     _printDebug('Getting Taxrates With Payload : ' + payload.toString());
     _setApiResourceUrl(path: 'taxes', queryParameters: payload);
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString());
     for (var t in response) {
       var tax = WCTaxRate.fromJson(t);
       _printDebug('prod gotten here : ' + order.toString());
@@ -1428,7 +1428,7 @@ class WooCommerceSdk {
 
   Future<WCTaxRate> getTaxRateById(int id) async {
     _setApiResourceUrl(path: 'taxes/' + id.toString());
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString());
     return WCTaxRate.fromJson(response);
   }
 
@@ -1438,7 +1438,7 @@ class WooCommerceSdk {
   Future<List<WCTaxClass>> getTaxClasses() async {
     List<WCTaxClass> taxClasses = [];
     _setApiResourceUrl(path: 'taxes/classes');
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString());
     for (var t in response) {
       var tClass = WCTaxClass.fromJson(t);
       _printDebug('tax class gotten here : ' + tClass.toString());
@@ -1453,7 +1453,7 @@ class WooCommerceSdk {
   Future<List<WCShippingZone>> getShippingZones() async {
     List<WCShippingZone> shippingZones = [];
     _setApiResourceUrl(path: 'shipping/zones');
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString());
     for (var z in response) {
       var sZone = WCShippingZone.fromJson(z);
       _printDebug('shipping zones gotten here : ' + sZone.toString());
@@ -1467,7 +1467,7 @@ class WooCommerceSdk {
   Future<WCShippingZone> getShippingZoneById(int id) async {
     WCShippingZone shippingZone;
     _setApiResourceUrl(path: 'shipping/zones/' + id.toString());
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString());
     shippingZone = WCShippingZone.fromJson(response);
     return shippingZone;
   }
@@ -1478,7 +1478,7 @@ class WooCommerceSdk {
   Future<List<WCShippingMethod>> getShippingMethods() async {
     List<WCShippingMethod> shippingMethods = [];
     _setApiResourceUrl(path: 'shipping_methods');
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString());
     for (var z in response) {
       var sMethod = WCShippingMethod.fromJson(z);
       _printDebug('shipping methods gotten here : ' + sMethod.toString());
@@ -1492,7 +1492,7 @@ class WooCommerceSdk {
   Future<WCShippingMethod> getShippingMethodById(int id) async {
     WCShippingMethod shippingMethod;
     _setApiResourceUrl(path: 'shipping_methods/' + id.toString());
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString());
     shippingMethod = WCShippingMethod.fromJson(response);
     return shippingMethod;
   }
@@ -1505,7 +1505,7 @@ class WooCommerceSdk {
     List<WCShippingZoneMethod> shippingZoneMethods = [];
     _setApiResourceUrl(
         path: 'shipping/zones/' + shippingZoneId.toString() + '/methods');
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString());
     for (var l in response) {
       var sMethod = WCShippingZoneMethod.fromJson(l);
       _printDebug(
@@ -1525,7 +1525,7 @@ class WooCommerceSdk {
             zoneId.toString() +
             'methods/' +
             methodId.toString());
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString());
     shippingZoneMethod = WCShippingZoneMethod.fromJson(response);
     return shippingZoneMethod;
   }
@@ -1558,7 +1558,7 @@ class WooCommerceSdk {
     List<WCShippingZoneLocation> shippingZoneLocations = [];
     _setApiResourceUrl(
         path: 'shipping/zones/' + shippingZoneId.toString() + '/locations');
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString());
     for (var l in response) {
       var sZoneLocation = WCShippingZoneLocation.fromJson(l);
       _printDebug(
@@ -1574,7 +1574,7 @@ class WooCommerceSdk {
   Future<List<WCPaymentGateway>> getPaymentGateways() async {
     List<WCPaymentGateway> gateways = [];
     _setApiResourceUrl(path: 'payment_gateways');
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString());
     for (var g in response) {
       var sMethod = WCPaymentGateway.fromJson(g);
       _printDebug(
@@ -1589,7 +1589,7 @@ class WooCommerceSdk {
   Future<WCPaymentGateway> getPaymentGatewayById(int id) async {
     WCPaymentGateway paymentGateway;
     _setApiResourceUrl(path: 'payment_gateways/' + id.toString());
-    final response = await get(queryUri.toString());
+    final response = await get(endPoint: queryUri.toString());
     paymentGateway = WCPaymentGateway.fromJson(response);
     return paymentGateway;
   }
@@ -1783,7 +1783,7 @@ class WooCommerceSdk {
 
   /// Make a custom get request to a Woocommerce endpoint, using WooCommerce SDK.
 
-  Future<dynamic> get(String endPoint) async {
+  Future<dynamic> get({String endPoint, bool auth = true}) async {
     String url = this._getOAuthURL("GET", endPoint);
     String _token = await _localDbService.getSecurityAccess();
     String _bearerToken = "Bearer $_token";
@@ -1793,7 +1793,8 @@ class WooCommerceSdk {
     try {
       final http.Response response = await http.get(url, headers: headers);
       _printDebug(
-          '${response.request.method.toString()} request -> ${response.request.url.toString()}');
+          '${response.request.method.toString()} request -> ${response.request
+              .url.toString()}');
       _printDebug('request headers:${response.request.headers.toString()}');
       _printDebug(
           'response status:${response.statusCode.toString()} data:${response.body.toString()}');
