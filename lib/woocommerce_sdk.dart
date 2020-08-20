@@ -156,7 +156,7 @@ class WooCommerceSdk {
         this.setAuth = Auth.fromJson(authResponse.toJson());
         _localDbService.updateSecurityAccess(authInstance.token);
         _urlHeader['Authorization'] =
-        'Bearer ${_localDbService.getSecurityAccess()}';
+            'Bearer ${_localDbService.getSecurityAccess()}';
         return authInstance;
       }
       throw new WCError(
@@ -183,17 +183,17 @@ class WooCommerceSdk {
       // if auth is null
       if (authInstance == null) {
         // preparing auth refreshing payload
-
         String _token = await _localDbService.getSecurityAccess();
         String _bearerToken = "Bearer $_token";
         Map<String, String> headers = new HashMap();
         headers.putIfAbsent('Accept', () => 'application/json charset=utf-8');
         headers.putIfAbsent('Authorization', () => _bearerToken);
-
+        _printDebug('old security token : $_token');
         final response =
         await http.get(URL_AUTH_TOKEN_REFRESH, headers: headers);
         if (response.statusCode >= 200 && response.statusCode < 300) {
           this.setAuth = Auth.fromJson(json.decode(response.body));
+          _printDebug('new security token : ' + authInstance.token);
         } else {
           logUserOut();
           // bad status
@@ -203,22 +203,19 @@ class WooCommerceSdk {
 
       // customer access is expired
       if (await authInstance.isExpired) {
-        // preparing auth refreshing payload
-        final body = {'token': authInstance.token};
-        // making request for refreshing auth
-        final response = await http.post(this.baseUrl + URL_AUTH_TOKEN_REFRESH,
-            body: json.encode(body),
-            headers: {'Content-Type': 'application/json'});
-        // status should be success
+        String _token = await _localDbService.getSecurityAccess();
+        String _bearerToken = "Bearer $_token";
+        Map<String, String> headers = new HashMap();
+        headers.putIfAbsent('Accept', () => 'application/json charset=utf-8');
+        headers.putIfAbsent('Authorization', () => _bearerToken);
+        _printDebug('old security token : $_token');
+        final response =
+        await http.get(URL_AUTH_TOKEN_REFRESH, headers: headers);
         if (response.statusCode >= 200 && response.statusCode < 300) {
-          WCAuthResponse authResponse =
-          WCAuthResponse.fromJson(json.decode(response.body));
-          this.setAuth = Auth.fromJson(authResponse.toJson());
-          // updating the security access `access_token`
-          _localDbService.updateSecurityAccess(authInstance.token);
-          _urlHeader['Authorization'] = 'Bearer ${authResponse.access_token}';
-          return authInstance;
+          this.setAuth = Auth.fromJson(json.decode(response.body));
+          _printDebug('new security token : ' + authInstance.token);
         } else {
+          logUserOut();
           // bad status
           throw new WCError.fromJson(json.decode(response.body));
         }
