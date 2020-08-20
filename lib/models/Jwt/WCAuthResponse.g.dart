@@ -8,17 +8,21 @@ part of 'WCAuthResponse.dart';
 
 WCAuthResponse _$WCAuthResponseFromJson(Map<String, dynamic> json) {
   return WCAuthResponse(
-    json['wp_user'] as Map<String, dynamic>,
-    json['access_token'] as String,
-    json['refresh_token'] as String,
-    json['expires_in'] as int,
+    json['success'] as bool,
+    json['status_code'] as int,
+    json['code'] as String,
+    json['message'] as String,
+    json['data'] == null
+        ? null
+        : Auth.fromJson(json['data'] as Map<String, dynamic>),
   );
 }
 
 Map<String, dynamic> _$WCAuthResponseToJson(WCAuthResponse instance) =>
     <String, dynamic>{
-      'wp_user': instance.wp_user,
-      'access_token': instance.access_token,
-      'refresh_token': instance.refresh_token,
-      'expires_in': instance.expires_in,
+      'success': instance.success,
+      'status_code': instance.statusCode,
+      'code': instance.code,
+      'message': instance.message,
+      'data': instance.data,
     };

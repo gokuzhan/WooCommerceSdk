@@ -1,16 +1,18 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:woocommerce_sdk/models/Auth/Auth.dart';
 
 part 'WCAuthResponse.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class WCAuthResponse {
-  final Map<String, dynamic> wp_user;
-  final String access_token;
-  final String refresh_token;
-  final int expires_in;
+  final bool success;
+  final int statusCode;
+  final String code;
+  final String message;
+  final Auth data;
 
   WCAuthResponse(
-      this.wp_user, this.access_token, this.refresh_token, this.expires_in);
+      this.success, this.statusCode, this.code, this.message, this.data);
 
   factory WCAuthResponse.fromJson(Map<String, dynamic> json) =>
       _$WCAuthResponseFromJson(json);
