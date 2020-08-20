@@ -150,17 +150,12 @@ class WooCommerceSdk {
     if (response.statusCode >= 200 && response.statusCode < 300) {
       WCAuthResponse authResponse =
           WCAuthResponse.fromJson(json.decode(response.body));
-      // checking customer capabilities
-      final capabilities = authResponse.wp_user["caps"];
-      if (capabilities != null && capabilities["customer"] == true) {
-        this.setAuth = Auth.fromJson(authResponse.toJson());
-        _localDbService.updateSecurityAccess(authInstance.token);
-        _urlHeader['Authorization'] =
-            'Bearer ${_localDbService.getSecurityAccess()}';
-        return authInstance;
-      }
-      throw new WCError(
-          "not_customer", "Authorized user is not a customer ", null);
+
+      this.setAuth = Auth.fromJson(authResponse.data.toJson());
+      _localDbService.updateSecurityAccess(authInstance.token);
+      _urlHeader['Authorization'] =
+          'Bearer ${_localDbService.getSecurityAccess()}';
+      return authInstance;
     } else {
       throw new WCError.fromJson(json.decode(response.body));
     }
