@@ -187,7 +187,9 @@ class WooCommerceSdk {
         final response =
             await http.get(URL_AUTH_TOKEN_REFRESH, headers: headers);
         if (response.statusCode >= 200 && response.statusCode < 300) {
-          this.setAuth = Auth.fromJson(json.decode(response.body));
+          final WCAuthResponse authResponse =
+              WCAuthResponse.fromJson(json.decode(response.body));
+          this.setAuth = Auth.fromJson(authResponse.data.toJson());
           _printDebug('new security token : ' + authInstance.token);
         } else {
           logUserOut();
@@ -207,7 +209,9 @@ class WooCommerceSdk {
         final response =
             await http.get(URL_AUTH_TOKEN_REFRESH, headers: headers);
         if (response.statusCode >= 200 && response.statusCode < 300) {
-          this.setAuth = Auth.fromJson(json.decode(response.body));
+          final WCAuthResponse authResponse =
+          WCAuthResponse.fromJson(json.decode(response.body));
+          this.setAuth = Auth.fromJson(authResponse.data.toJson());
           _printDebug('new security token : ' + authInstance.token);
         } else {
           logUserOut();
