@@ -2,8 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:woocommerce_sdk/woocommerce_sdk.dart';
 
 part 'Auth.g.dart';
-
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class Auth {
   static WCJwtDecoder _jwtInstance;
   final String token;
