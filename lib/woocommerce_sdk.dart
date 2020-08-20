@@ -210,7 +210,7 @@ class WooCommerceSdk {
         headers.putIfAbsent('Authorization', () => _bearerToken);
         _printDebug('old security token : $_token');
         final response =
-        await http.get(URL_AUTH_TOKEN_REFRESH, headers: headers);
+            await http.get(URL_AUTH_TOKEN_REFRESH, headers: headers);
         if (response.statusCode >= 200 && response.statusCode < 300) {
           this.setAuth = Auth.fromJson(json.decode(response.body));
           _printDebug('new security token : ' + authInstance.token);
@@ -1789,7 +1789,7 @@ class WooCommerceSdk {
     String _bearerToken = "Bearer $_token";
     Map<String, String> headers = new HashMap();
     headers.putIfAbsent('Accept', () => 'application/json charset=utf-8');
-    headers.putIfAbsent('Authorization', () => _bearerToken);
+    if (auth) headers.putIfAbsent('Authorization', () => _bearerToken);
     try {
       final http.Response response = await http.get(url, headers: headers);
       _printDebug(
@@ -1797,7 +1797,8 @@ class WooCommerceSdk {
               .url.toString()}');
       _printDebug('request headers:${response.request.headers.toString()}');
       _printDebug(
-          'response status:${response.statusCode.toString()} data:${response.body.toString()}');
+          'response status:${response.statusCode.toString()} data:${response
+              .body.toString()}');
       if (response.statusCode == 200) {
         return json.decode(response.body);
       }
