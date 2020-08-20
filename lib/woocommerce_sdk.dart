@@ -239,7 +239,7 @@ class WooCommerceSdk {
       _setApiResourceUrl(
         path: 'customers/' + auth.id.toString(),
       );
-      final response = await get(endPoint: queryUri.toString());
+      final response = await get(endPoint: queryUri.toString(), auth: false);
       customer = WCCustomer.fromJson(response);
       return customer;
     } else {
