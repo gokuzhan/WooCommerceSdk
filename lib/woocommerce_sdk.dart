@@ -184,11 +184,11 @@ class WooCommerceSdk {
         headers.putIfAbsent('Accept', () => 'application/json charset=utf-8');
         headers.putIfAbsent('Authorization', () => _bearerToken);
         _printDebug('old security token : $_token');
-        final response =
-        await http.get(this.baseUrl + URL_AUTH_TOKEN_REFRESH, headers: headers);
+        final response = await http.get(this.baseUrl + URL_AUTH_TOKEN_REFRESH,
+            headers: headers);
         if (response.statusCode >= 200 && response.statusCode < 300) {
           final WCAuthResponse authResponse =
-          WCAuthResponse.fromJson(json.decode(response.body));
+              WCAuthResponse.fromJson(json.decode(response.body));
           this.setAuth =
               Auth.fromJson((authResponse.data as Map<String, dynamic>));
           _printDebug('new security token : ' + authInstance.token);
@@ -207,13 +207,13 @@ class WooCommerceSdk {
         headers.putIfAbsent('Accept', () => 'application/json charset=utf-8');
         headers.putIfAbsent('Authorization', () => _bearerToken);
         _printDebug('old security token : $_token');
-        final response =
-        await http.get(this.baseUrl + URL_AUTH_TOKEN_REFRESH, headers: headers);
+        final response = await http.get(this.baseUrl + URL_AUTH_TOKEN_REFRESH,
+            headers: headers);
         if (response.statusCode >= 200 && response.statusCode < 300) {
           final WCAuthResponse authResponse =
           WCAuthResponse.fromJson(json.decode(response.body));
-          this.setAuth =
-              Auth.fromJson((authResponse.data as Map<String, dynamic>));
+          _printDebug(authResponse.data.toJson().toString());
+          this.setAuth = Auth.fromJson(authResponse.data.toJson());
           _printDebug('new security token : ' + authInstance.token);
         } else {
           logUserOut();
