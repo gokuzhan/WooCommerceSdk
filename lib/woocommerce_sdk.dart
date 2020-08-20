@@ -151,7 +151,7 @@ class WooCommerceSdk {
       WCAuthResponse authResponse =
           WCAuthResponse.fromJson(json.decode(response.body));
 
-      this.setAuth = Auth.fromJson(authResponse.data.toJson());
+      this.setAuth = Auth.fromJson((authResponse.data as Map<String, dynamic>));
       _localDbService.updateSecurityAccess(authInstance.token);
       _urlHeader['Authorization'] =
           'Bearer ${_localDbService.getSecurityAccess()}';
@@ -185,11 +185,12 @@ class WooCommerceSdk {
         headers.putIfAbsent('Authorization', () => _bearerToken);
         _printDebug('old security token : $_token');
         final response =
-            await http.get(URL_AUTH_TOKEN_REFRESH, headers: headers);
+        await http.get(this.baseUrl + URL_AUTH_TOKEN_REFRESH, headers: headers);
         if (response.statusCode >= 200 && response.statusCode < 300) {
           final WCAuthResponse authResponse =
-              WCAuthResponse.fromJson(json.decode(response.body));
-          this.setAuth = Auth.fromJson(authResponse.data.toJson());
+          WCAuthResponse.fromJson(json.decode(response.body));
+          this.setAuth =
+              Auth.fromJson((authResponse.data as Map<String, dynamic>));
           _printDebug('new security token : ' + authInstance.token);
         } else {
           logUserOut();
@@ -207,11 +208,12 @@ class WooCommerceSdk {
         headers.putIfAbsent('Authorization', () => _bearerToken);
         _printDebug('old security token : $_token');
         final response =
-            await http.get(URL_AUTH_TOKEN_REFRESH, headers: headers);
+        await http.get(this.baseUrl + URL_AUTH_TOKEN_REFRESH, headers: headers);
         if (response.statusCode >= 200 && response.statusCode < 300) {
           final WCAuthResponse authResponse =
           WCAuthResponse.fromJson(json.decode(response.body));
-          this.setAuth = Auth.fromJson(authResponse.data.toJson());
+          this.setAuth =
+              Auth.fromJson((authResponse.data as Map<String, dynamic>));
           _printDebug('new security token : ' + authInstance.token);
         } else {
           logUserOut();
