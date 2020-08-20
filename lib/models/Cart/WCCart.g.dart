@@ -15,7 +15,7 @@ WCCart _$WCCartFromJson(Map<String, dynamic> json) {
             e == null ? null : WCCartItem.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     json['needs_shipping'] as bool,
-    json['total_price'] as dynamic,
+    json['total_price'],
     json['total_weight'] as int,
   );
 }

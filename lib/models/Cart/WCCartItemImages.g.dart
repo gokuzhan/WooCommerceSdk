@@ -8,7 +8,7 @@ part of 'WCCartItemImages.dart';
 
 WCCartItemImages _$WCCartItemImagesFromJson(Map<String, dynamic> json) {
   return WCCartItemImages(
-    json['id'] as dynamic,
+    json['id'],
     json['src'] as String,
     json['thumbnail'] as String,
     json['srcset'] as String,

@@ -5,10 +5,6 @@ class LocalDatabaseService {
     (await SharedPreferences.getInstance()).setString('access_token', token);
   }
 
-  updateSecurityRefresh(String refresh) async {
-    (await SharedPreferences.getInstance()).setString('refresh_token', refresh);
-  }
-
   deleteSecurityToken() async {
     (await SharedPreferences.getInstance()).remove('access_token');
     (await SharedPreferences.getInstance()).remove('refresh_token');
@@ -17,15 +13,6 @@ class LocalDatabaseService {
   Future<String> getSecurityAccess() async {
     final token =
         (await SharedPreferences.getInstance()).getString('access_token');
-    if (token == null) {
-      return '0';
-    }
-    return token;
-  }
-
-  Future<String> getSecurityRefresh() async {
-    final token =
-        (await SharedPreferences.getInstance()).getString('refresh_token');
     if (token == null) {
       return '0';
     }
