@@ -3,7 +3,7 @@ import 'package:woocommerce_sdk/models/Auth/Auth.dart';
 
 part 'WCAuthResponse.g.dart';
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class WCAuthResponse {
   final bool success;
   final int statusCode;

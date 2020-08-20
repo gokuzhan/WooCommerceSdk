@@ -9,7 +9,7 @@ part of 'WCAuthResponse.dart';
 WCAuthResponse _$WCAuthResponseFromJson(Map<String, dynamic> json) {
   return WCAuthResponse(
     json['success'] as bool,
-    json['status_code'] as int,
+    json['statusCode'] as int,
     json['code'] as String,
     json['message'] as String,
     json['data'] == null
@@ -21,7 +21,7 @@ WCAuthResponse _$WCAuthResponseFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$WCAuthResponseToJson(WCAuthResponse instance) =>
     <String, dynamic>{
       'success': instance.success,
-      'status_code': instance.statusCode,
+      'statusCode': instance.statusCode,
       'code': instance.code,
       'message': instance.message,
       'data': instance.data,

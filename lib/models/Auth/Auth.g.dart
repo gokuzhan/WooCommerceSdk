@@ -18,8 +18,7 @@ Auth _$AuthFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$AuthToJson(Auth instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$AuthToJson(Auth instance) => <String, dynamic>{
       'token': instance.token,
       'id': instance.id,
       'email': instance.email,
