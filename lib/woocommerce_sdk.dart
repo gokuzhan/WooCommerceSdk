@@ -150,8 +150,8 @@ class WooCommerceSdk {
     if (response.statusCode >= 200 && response.statusCode < 300) {
       WCAuthResponse authResponse =
           WCAuthResponse.fromJson(json.decode(response.body));
-
-      this.setAuth = Auth.fromJson((authResponse.data as Map<String, dynamic>));
+      _printDebug('new security token : ' + authResponse.toJson().toString());
+      this.setAuth = Auth.fromJson(authResponse.data.toJson());
       _localDbService.updateSecurityAccess(authInstance.token);
       _urlHeader['Authorization'] =
           'Bearer ${_localDbService.getSecurityAccess()}';
@@ -188,9 +188,9 @@ class WooCommerceSdk {
             headers: headers);
         if (response.statusCode >= 200 && response.statusCode < 300) {
           final WCAuthResponse authResponse =
-              WCAuthResponse.fromJson(json.decode(response.body));
+          WCAuthResponse.fromJson(json.decode(response.body));
           this.setAuth =
-              Auth.fromJson((authResponse.data as Map<String, dynamic>));
+              Auth.fromJson(authResponse.data.toJson());
           _printDebug('new security token : ' + authInstance.token);
         } else {
           logUserOut();
