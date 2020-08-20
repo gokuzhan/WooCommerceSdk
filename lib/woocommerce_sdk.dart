@@ -236,9 +236,8 @@ class WooCommerceSdk {
     final auth = await getAuthInstance();
     if (await isCustomerLoggedIn()) {
       WCCustomer customer;
-      final id = await auth.customerId;
       _setApiResourceUrl(
-        path: 'customers/' + id.toString(),
+        path: 'customers/' + auth.id.toString(),
       );
       final response = await get(endPoint: queryUri.toString());
       customer = WCCustomer.fromJson(response);
