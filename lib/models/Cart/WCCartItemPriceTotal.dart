@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'PriceTotal.g.dart';
+part 'WCCartItemPriceTotal.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class PriceTotal {
+class WCCartItemPriceTotal {
   final String currencyCode;
   final String currencySymbol;
   final int currencyMinorUnit;
@@ -16,7 +16,7 @@ class PriceTotal {
   final String lineTotal;
   final String lineTotalTax;
 
-  PriceTotal(
+  WCCartItemPriceTotal(
       this.currencyCode,
       this.currencySymbol,
       this.currencyMinorUnit,
@@ -35,8 +35,8 @@ class PriceTotal {
   get getTotal =>
       int.parse(this.lineTotal).toStringAsPrecision(currencyMinorUnit);
 
-  factory PriceTotal.fromJson(Map<String, dynamic> json) =>
-      _$PriceTotalFromJson(json);
+  factory WCCartItemPriceTotal.fromJson(Map<String, dynamic> json) =>
+      _$WCCartItemPriceTotalFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PriceTotalToJson(this);
+  Map<String, dynamic> toJson() => _$WCCartItemPriceTotalToJson(this);
 }

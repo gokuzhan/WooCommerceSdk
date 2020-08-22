@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:woocommerce_sdk/models/Cart/WCCartItemImages.dart';
+import 'package:woocommerce_sdk/models/Cart/WCCartItemPriceTotal.dart';
 import 'package:woocommerce_sdk/models/Pricing/Price.dart';
-import 'package:woocommerce_sdk/models/Pricing/PriceTotal.dart';
 
 part 'WCCartItem.g.dart';
 
@@ -24,7 +24,7 @@ class WCCartItem {
   final bool backordersAllowed;
   final bool soldIndividually;
   final Price prices;
-  final PriceTotal totals;
+  final WCCartItemPriceTotal totals;
 
   WCCartItem(
       this.key,

@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:woocommerce_sdk/models/Pricing/PriceTotal.dart';
+import 'package:woocommerce_sdk/models/Cart/WCCartItemPriceTotal.dart';
 import 'package:woocommerce_sdk/models/Shipping/Method/WCShippingMethodFlatRate.dart';
 import 'package:woocommerce_sdk/woocommerce_sdk.dart';
 
@@ -15,7 +15,7 @@ class WCCart {
   final int itemsWeight;
   final bool needsPayment;
   final bool needsShipping;
-  final PriceTotal totals;
+  final WCCartItemPriceTotal totals;
   final List<Map<String, dynamic>> errors;
 
   WCCart(
