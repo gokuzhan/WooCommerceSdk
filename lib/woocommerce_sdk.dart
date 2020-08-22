@@ -189,9 +189,8 @@ class WooCommerceSdk {
             headers: headers);
         if (response.statusCode >= 200 && response.statusCode < 300) {
           final WCAuthResponse authResponse =
-          WCAuthResponse.fromJson(json.decode(response.body));
-          this.setAuth =
-              Auth.fromJson(authResponse.data.toJson());
+              WCAuthResponse.fromJson(json.decode(response.body));
+          this.setAuth = Auth.fromJson(authResponse.data.toJson());
           _printDebug('new security token : ' + authInstance.token);
         } else {
           logUserOut();
@@ -965,6 +964,7 @@ class WooCommerceSdk {
   /// Accepts an int [id] of a product or product variation, int quantity, and an array of chosen variation attribute objects
   /// Related endpoint : wc/store/cart
   ///
+
   Future<WCCartItem> addToMyCart(
       {@required String itemId,
       @required String quantity,
@@ -978,13 +978,9 @@ class WooCommerceSdk {
     if (authInstance != null) {
       _urlHeader['Authorization'] = 'Bearer ' + authInstance.token;
       final response = await http.post(
-        this.baseUrl + URL_STORE_API_PATH + 'cart/items',
-        headers: {
-          'Content-Type': 'application/json',
-          ..._urlHeader,
-        },
-        body: json.encode(data),
-      );
+          this.baseUrl + URL_STORE_API_PATH + 'cart/items',
+          headers: _urlHeader,
+          body: data);
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         final jsonStr = json.decode(response.body);
