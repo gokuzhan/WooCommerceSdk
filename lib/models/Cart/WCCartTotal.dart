@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:woocommerce_sdk/helpers/Number.dart';
 import 'package:woocommerce_sdk/models/Order/TaxLines.dart';
 
 part 'WCCartTotal.g.dart';
@@ -44,11 +45,9 @@ class WCCartTotal {
       this.totalTax,
       this.taxLines);
 
-  get getSubtotal =>
-      int.parse(this.totalPrice).toStringAsPrecision(currencyMinorUnit);
+  get getSubtotal => Number.price(totalPrice, currencyMinorUnit);
 
-  get getTotal =>
-      int.parse(this.totalPrice).toStringAsPrecision(currencyMinorUnit);
+  get getTotal => Number.price(totalPrice, currencyMinorUnit);
 
   factory WCCartTotal.fromJson(Map<String, dynamic> json) =>
       _$WCCartTotalFromJson(json);

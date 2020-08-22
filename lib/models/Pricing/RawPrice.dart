@@ -9,13 +9,6 @@ class RawPrice {
   final String regularPrice;
   final String salePrice;
 
-  get getPrice => int.parse(this.price).toStringAsPrecision(precision);
-
-  get getRegularPrice =>
-      int.parse(this.regularPrice).toStringAsPrecision(precision);
-
-  get getSalePrice => int.parse(this.salePrice).toStringAsPrecision(precision);
-
   RawPrice(this.precision, this.price, this.regularPrice, this.salePrice);
 
   factory RawPrice.fromJson(Map<String, dynamic> json) =>
