@@ -12,9 +12,10 @@ Auth _$AuthFromJson(Map<String, dynamic> json) {
     json['id'] as int,
     json['email'] as String,
     json['nicename'] as String,
-    json['firstName'] as String,
-    json['lastName'] as String,
-    json['displayName'] as String,
+    json['first_name'] as String,
+    json['last_name'] as String,
+    json['display_name'] as String,
+    json['store_nonce'] as String,
   );
 }
 
@@ -23,7 +24,8 @@ Map<String, dynamic> _$AuthToJson(Auth instance) => <String, dynamic>{
       'id': instance.id,
       'email': instance.email,
       'nicename': instance.nicename,
-      'firstName': instance.firstName,
-      'lastName': instance.lastName,
-      'displayName': instance.displayName,
+      'first_name': instance.firstName,
+      'last_name': instance.lastName,
+      'display_name': instance.displayName,
+      'store_nonce': instance.storeNonce,
     };
