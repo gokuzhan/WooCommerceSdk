@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:woocommerce_sdk/models/Pricing/RawPrices.dart';
+import 'package:woocommerce_sdk/models/Pricing/RawPrice.dart';
 
 part 'Price.g.dart';
 
@@ -16,7 +16,7 @@ class Price {
   final String regularPrice;
   final String salePrice;
   dynamic priceRange;
-  RawPrices rawPrices;
+  final RawPrice rawPrices;
 
   Price(
       this.currencyCode,
@@ -28,7 +28,16 @@ class Price {
       this.currencySuffix,
       this.price,
       this.regularPrice,
-      this.salePrice);
+      this.salePrice,
+      this.rawPrices);
+
+  get getPrice => int.parse(this.price).toStringAsPrecision(currencyMinorUnit);
+
+  get getRegularPrice =>
+      int.parse(this.regularPrice).toStringAsPrecision(currencyMinorUnit);
+
+  get getSalePrice =>
+      int.parse(this.salePrice).toStringAsPrecision(currencyMinorUnit);
 
   factory Price.fromJson(Map<String, dynamic> json) => _$PriceFromJson(json);
 

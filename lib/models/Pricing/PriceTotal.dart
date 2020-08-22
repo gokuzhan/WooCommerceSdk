@@ -29,6 +29,12 @@ class PriceTotal {
       this.lineTotal,
       this.lineTotalTax);
 
+  get getSubtotal =>
+      int.parse(this.lineSubtotal).toStringAsPrecision(currencyMinorUnit);
+
+  get getTotal =>
+      int.parse(this.lineTotal).toStringAsPrecision(currencyMinorUnit);
+
   factory PriceTotal.fromJson(Map<String, dynamic> json) =>
       _$PriceTotalFromJson(json);
 

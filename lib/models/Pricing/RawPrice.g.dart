@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'RawPrices.dart';
+part of 'RawPrice.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-RawPrices _$RawPricesFromJson(Map<String, dynamic> json) {
-  return RawPrices(
+RawPrice _$RawPriceFromJson(Map<String, dynamic> json) {
+  return RawPrice(
     json['precision'] as int,
     json['price'] as String,
     json['regular_price'] as String,
@@ -15,7 +15,7 @@ RawPrices _$RawPricesFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$RawPricesToJson(RawPrices instance) => <String, dynamic>{
+Map<String, dynamic> _$RawPriceToJson(RawPrice instance) => <String, dynamic>{
       'precision': instance.precision,
       'price': instance.price,
       'regular_price': instance.regularPrice,

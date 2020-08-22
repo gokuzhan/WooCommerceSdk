@@ -36,8 +36,7 @@ WCCart _$WCCartFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$WCCartToJson(WCCart instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$WCCartToJson(WCCart instance) => <String, dynamic>{
       'coupons': instance.coupons,
       'shipping_rates': instance.shippingRates,
       'shipping_address': instance.shippingAddress,

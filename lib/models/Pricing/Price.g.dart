@@ -18,11 +18,10 @@ Price _$PriceFromJson(Map<String, dynamic> json) {
     json['price'] as String,
     json['regular_price'] as String,
     json['sale_price'] as String,
-  )
-    ..priceRange = json['price_range']
-    ..rawPrices = json['raw_prices'] == null
+    json['raw_prices'] == null
         ? null
-        : RawPrices.fromJson(json['raw_prices'] as Map<String, dynamic>);
+        : RawPrice.fromJson(json['raw_prices'] as Map<String, dynamic>),
+  )..priceRange = json['price_range'];
 }
 
 Map<String, dynamic> _$PriceToJson(Price instance) => <String, dynamic>{
