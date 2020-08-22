@@ -977,9 +977,9 @@ class WooCommerceSdk {
     await getAuthInstance();
     if (authInstance != null) {
       _urlHeader['Authorization'] = 'Bearer ' + authInstance.token;
-      _setApiResourceUrl(path: 'cart/items', isShop: true);
-      final response = await http.post(this.queryUri.toString(),
-          headers: _urlHeader, body: data);
+      String url = this._getOAuthURL("GET", 'cart/items');
+      final response =
+          await http.post(url.toString(), headers: _urlHeader, body: data);
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         final jsonStr = json.decode(response.body);
