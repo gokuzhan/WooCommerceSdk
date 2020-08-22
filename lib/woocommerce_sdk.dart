@@ -211,7 +211,7 @@ class WooCommerceSdk {
             headers: headers);
         if (response.statusCode >= 200 && response.statusCode < 300) {
           final WCAuthResponse authResponse =
-          WCAuthResponse.fromJson(json.decode(response.body));
+              WCAuthResponse.fromJson(json.decode(response.body));
           _printDebug(authResponse.data.toJson().toString());
           this.setAuth = Auth.fromJson(authResponse.data.toJson());
           _printDebug('new security token : ' + authInstance.token);
@@ -977,10 +977,9 @@ class WooCommerceSdk {
     await getAuthInstance();
     if (authInstance != null) {
       _urlHeader['Authorization'] = 'Bearer ' + authInstance.token;
-      final response = await http.post(
-          this.baseUrl + URL_STORE_API_PATH + 'cart/items',
-          headers: _urlHeader,
-          body: data);
+      _setApiResourceUrl(path: 'cart/items', isShop: true);
+      final response = await http.post(this.queryUri.toString(),
+          headers: _urlHeader, body: data);
 
       if (response.statusCode >= 200 && response.statusCode < 300) {
         final jsonStr = json.decode(response.body);
