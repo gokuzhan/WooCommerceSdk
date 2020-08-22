@@ -16,21 +16,23 @@ class Price {
   final String price;
   final String regularPrice;
   final String salePrice;
-  dynamic priceRange;
+  final dynamic priceRange;
   final RawPrice rawPrices;
 
   Price(
-      this.currencyCode,
-      this.currencySymbol,
-      this.currencyMinorUnit,
-      this.currencyDecimalSeparator,
-      this.currencyThousandSeparator,
-      this.currencyPrefix,
-      this.currencySuffix,
-      this.price,
-      this.regularPrice,
-      this.salePrice,
-      this.rawPrices);
+    this.currencyCode,
+    this.currencySymbol,
+    this.currencyMinorUnit,
+    this.currencyDecimalSeparator,
+    this.currencyThousandSeparator,
+    this.currencyPrefix,
+    this.currencySuffix,
+    this.price,
+    this.regularPrice,
+    this.salePrice,
+    this.priceRange,
+    this.rawPrices,
+  );
 
   get getPrice => Number.price(price, currencyMinorUnit);
 

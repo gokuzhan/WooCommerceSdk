@@ -15,14 +15,13 @@ class WCCartItem {
   final String shortDescription;
   final String description;
   final String sku;
-  final String permalink;
-  final List<WCCartItemImages> images;
-  final String price;
-  final String linePrice;
-  final List<String> variation;
   final dynamic lowStockRemaining;
   final bool backordersAllowed;
   final bool soldIndividually;
+  final String permalink;
+  final List<WCCartItemImages> images;
+  final String linePrice;
+  final List<dynamic> variation;
   final Price prices;
   final WCCartItemPriceTotal totals;
 
@@ -35,14 +34,13 @@ class WCCartItem {
       this.shortDescription,
       this.description,
       this.sku,
-      this.permalink,
-      this.images,
-      this.price,
-      this.linePrice,
-      this.variation,
       this.lowStockRemaining,
       this.backordersAllowed,
       this.soldIndividually,
+      this.permalink,
+      this.images,
+      this.linePrice,
+      this.variation,
       this.prices,
       this.totals);
 
