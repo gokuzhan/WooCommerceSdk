@@ -41,6 +41,7 @@ import 'utils/local_db.dart';
 export 'helpers/Jwt.dart' show WCJwtDecoder;
 export 'models/Cart/WCCart.dart' show WCCart;
 export 'models/Cart/WCCartItem.dart' show WCCartItem;
+export 'models/Cart/WCShippingAddress.dart' show WCShippingAddress;
 export 'models/Coupon/WCCoupon.dart' show WCCoupon;
 export 'models/Customer/Download/WCCustomerDownload.dart'
     show WCCustomerDownload;

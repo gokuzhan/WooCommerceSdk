@@ -1,19 +1,34 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:woocommerce_sdk/models/Cart/WCCartItem.dart';
+import 'package:woocommerce_sdk/models/Pricing/PriceTotal.dart';
+import 'package:woocommerce_sdk/models/Shipping/Method/WCShippingMethodFlatRate.dart';
+import 'package:woocommerce_sdk/woocommerce_sdk.dart';
 
 part 'WCCart.g.dart';
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class WCCart {
-  final String currency;
-  final int itemCount;
+  final List<WCCoupon> coupons;
+  final List<WCShippingMethodFlatRate> shippingRates;
+  final WCShippingAddress shippingAddress;
   final List<WCCartItem> items;
+  final int itemsCount;
+  final int itemsWeight;
+  final bool needsPayment;
   final bool needsShipping;
-  final dynamic totalPrice;
-  final int totalWeight;
+  final PriceTotal totals;
+  final List<Map<String, dynamic>> errors;
 
-  WCCart(this.currency, this.itemCount, this.items, this.needsShipping,
-      this.totalPrice, this.totalWeight);
+  WCCart(
+      this.coupons,
+      this.shippingRates,
+      this.shippingAddress,
+      this.items,
+      this.itemsCount,
+      this.itemsWeight,
+      this.needsPayment,
+      this.needsShipping,
+      this.totals,
+      this.errors);
 
   factory WCCart.fromJson(Map<String, dynamic> json) => _$WCCartFromJson(json);
 
