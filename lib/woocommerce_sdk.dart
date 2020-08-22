@@ -946,8 +946,8 @@ class WooCommerceSdk {
     return WCProductReview.fromJson(response);
   }
 
-  /**
-      /// Accepts an int [id] of a product or product variation, int quantity, and an array of chosen variation attribute objects
+//  /**
+  /// Accepts an int [id] of a product or product variation, int quantity, and an array of chosen variation attribute objects
       /// Related endpoint : wc/store/cart
       Future<WCCartItem>addToCart({@required int itemId, @required int quantity, List<WCProductVariation> variations}) async{
       Map<String, dynamic> data = {
@@ -959,41 +959,39 @@ class WooCommerceSdk {
       final response = await post(queryUri.toString(), data,);
       return WCCartItem.fromJson(response);
       }
-   */
+
+//   */
 
   /// Accepts an int [id] of a product or product variation, int quantity, and an array of chosen variation attribute objects
   /// Related endpoint : wc/store/cart
   ///
 
-  Future<WCCartItem> addToMyCart(
-      {@required String itemId,
-      @required String quantity,
-      List<WCProductVariation> variations}) async {
-    Map<String, dynamic> data = {
-      'id': itemId,
-      'quantity': quantity,
-    };
-    if (variations != null) data['variations'] = variations;
-    await getAuthInstance();
-    if (authInstance != null) {
-      _urlHeader['Authorization'] = 'Bearer ' + authInstance.token;
-      String url = this._getOAuthURL("GET", 'cart/items');
-      final response =
-          await http.post(url.toString(), headers: _urlHeader, body: data);
-
-      if (response.statusCode >= 200 && response.statusCode < 300) {
-        final jsonStr = json.decode(response.body);
-
-        _printDebug('added to my cart : ' + jsonStr.toString());
-        return WCCartItem.fromJson(jsonStr);
-      } else {
-        WCError err = WCError.fromJson(json.decode(response.body));
-        throw err;
-      }
-    } else {
-      return null;
-    }
-  }
+//  Future<WCCartItem> addToMyCart(
+//      {@required String itemId,
+//      @required String quantity,
+//      List<WCProductVariation> variations}) async {
+//    Map<String, dynamic> data = {
+//      'id': itemId,
+//      'quantity': quantity,
+//    };
+//    if (variations != null) data['variations'] = variations;
+//    await getAuthInstance();
+//    _urlHeader['Authorization'] = 'Bearer ' + authInstance.token.toString();
+//    final response = await http.post(
+//        this.baseUrl + URL_STORE_API_PATH + 'cart/items',
+//        headers: _urlHeader,
+//        body: data);
+//
+//    if (response.statusCode >= 200 && response.statusCode < 300) {
+//      final jsonStr = json.decode(response.body);
+//
+//      _printDebug('added to my cart : ' + jsonStr.toString());
+//      return WCCartItem.fromJson(jsonStr);
+//    } else {
+//      WCError err = WCError.fromJson(json.decode(response.body));
+//      throw err;
+//    }
+//  }
 
   /// Returns a list of all [WCCartItem].
   ///
