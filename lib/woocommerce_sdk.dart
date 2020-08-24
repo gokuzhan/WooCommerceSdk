@@ -976,7 +976,7 @@ class WooCommerceSdk {
     if (variations != null) data['variations'] = variations;
     await getAuthInstance();
     _urlHeader['Authorization'] = 'Bearer ' + authInstance.token.toString();
-    _urlHeader['X-WC-Store-API-Nonce'] = authInstance.storeNonce.toString();
+//    _urlHeader['X-WC-Store-API-Nonce'] = authInstance.storeNonce.toString();
     final response = await http.post(
         this.baseUrl + URL_STORE_API_PATH + 'cart/items',
         headers: _urlHeader,
