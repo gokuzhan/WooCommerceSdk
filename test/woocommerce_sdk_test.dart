@@ -1,22 +1,43 @@
-import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http/http.dart' as http;
+import 'package:woocommerce_sdk/helpers/Number.dart';
+import 'package:woocommerce_sdk/models/Cart/WCCartTotal.dart';
 
-final post =
-    (String endpoint, Map<String, String> headers, Map<String, String> body) =>
-        http.post(endpoint, headers: headers, body: body);
-
-const LOGIN_URL = 'https://dev.nutzindia.com/2cheap/wp-json/jwt-auth/v1/token';
-const RF_URL =
-    'https://dev.nutzindia.com/2cheap/wp-json/jwt-auth/v1/token/refresh';
+final jsonString = {
+  "currency_code": "INR",
+  "currency_symbol": "₹",
+  "currency_minor_unit": 2,
+  "currency_decimal_separator": ".",
+  "currency_thousand_separator": ",",
+  "currency_prefix": "₹",
+  "currency_suffix": "",
+  "total_items": "2400",
+  "total_items_tax": "0",
+  "total_fees": "0",
+  "total_fees_tax": "0",
+  "total_discount": "0",
+  "total_discount_tax": "0",
+  "total_shipping": "0",
+  "total_shipping_tax": "0",
+  "total_price": "2400",
+  "total_tax": "0",
+  "tax_lines": []
+};
 
 void main() {
-  test('new token', () async {
-    final newToken = await http.get(RF_URL, headers: {
-      'Authorization':
-          'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvZGV2Lm51dHppbmRpYS5jb21cLzJjaGVhcCIsImlhdCI6MTU5Nzk0NDA4OCwibmJmIjoxNTk3OTQ0MDg4LCJleHAiOjE1OTg1NDg4ODgsImRhdGEiOnsidXNlciI6eyJpZCI6MTJ9fX0.A2W457HIXNz7Vi6mmhGS3W3ssGmYH5jg6F68PF_OZ7o'
-    });
-    print(json.decode(newToken.body));
+  test('cart check', () async {
+    WCCartTotal cartTotal = WCCartTotal.fromJson(jsonString);
+//    print(cartTotal.totalPrice.substring(
+//        0, cartTotal.totalPrice.length - cartTotal.currencyMinorUnit));
+    print(Number.price(cartTotal.totalPrice, cartTotal.currencyMinorUnit));
   });
+  Random rand = Random();
+  List<int> codeUnits = List.generate(10, (index) {
+    return rand.nextInt(26) + 97;
+  });
+
+  /// Random string uniquely generated to identify each signed request
+  String nonce = String.fromCharCodes(codeUnits);
+  print(nonce);
 }
